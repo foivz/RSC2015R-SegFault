@@ -50,8 +50,8 @@ class IndexController extends Controller
                 $response['file_path'] = $file_upload_url . basename($_FILES['image']['name']);
 
                 //save path
-                //$post->image = $response['file_name'];
-                //$post->save();
+                $post->image = $response['file_name'];
+                $post->save();
 
             } catch (Exception $e) {
                 // Exception occurred. Make error flag true
