@@ -22,6 +22,7 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => '1XlvWM0lciC5SDX9Fonx53hFq9pJUqyl',
+            'enableCsrfValidation' => false,
         ],
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
