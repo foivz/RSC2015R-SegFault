@@ -77,7 +77,7 @@ class IndexController extends Controller
 
     public function actionCreateapp()
     {
-        if($_POST) return 'ok';
+        if($_REQUEST) return 'ok';
 
         if($_POST) {
             //return 'ok';
