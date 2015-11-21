@@ -4,4 +4,9 @@
     <string name="password_placeholder">Lozinka</string>
     <string name="login_button">PRIJAVA</string>
     <string name="register_button">REGISTRACIJA</string>
+    <string name="title_activity_mapa">Map</string>
+    <string name="btnTakePicture">Capture Image</string>
+    <string name="btnRecordVideo">Record Video</string>
+    <string name="or">(or)</string>
+    <string name="btnUploadToServer">Upload to Server</string>
 </resources>

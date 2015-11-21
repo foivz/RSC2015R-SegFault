@@ -1,0 +1,21 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=16:74:85:E7:2A:5C:2A:1A:BF:D7:85:E7:C1:F4:F9:2C:68:65:E4:43%3Bcom.example.tinoba.liveball
+
+    You can also add your credentials to an existing key, using this line:
+    16:74:85:E7:2A:5C:2A:1A:BF:D7:85:E7:C1:F4:F9:2C:68:65:E4:43;com.example.tinoba.liveball
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="AIzaSyC_C1KTVMB8RB7r_7eTQvVYICnr3OdM2Y0" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyC_C1KTVMB8RB7r_7eTQvVYICnr3OdM2Y0
+    </string>
+</resources>

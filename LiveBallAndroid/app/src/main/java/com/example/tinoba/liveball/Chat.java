@@ -49,44 +49,13 @@ public class Chat extends AppCompatActivity {
         lista.setAdapter(customAdapter);
         Button gumb1 = (Button)findViewById(R.id.gumb1);
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3)
-            {
-
-            }
-        });
 
 
 
 
 
     }
-    public void prvi(View view){
-        Log.i("TAG","BEZVEZ");
-        LoginService loginService =
-                ServiceGenerator.createService(LoginService.class);
-
-        Call<String> call = loginService.sendMessage("Lijevo od tebe");
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Response<String> response, Retrofit retrofit) {
-                Log.i("TAG", response.message());
-                if (response.body() != null) {
-                    Log.i("TAG", response.body().toString());
-                } else Log.i("TAG", "no body");
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Log.e("TAG", t.getMessage());
-            }
-        });
-
-
-    }
+/*
     public void drugi(View view){
         LoginService loginService =
                 ServiceGenerator.createService(LoginService.class);
@@ -106,5 +75,5 @@ public class Chat extends AppCompatActivity {
                 Log.e("LOG IN failure", t.getMessage());
             }
         });
-    }
+    }*/
 }
