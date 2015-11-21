@@ -14,7 +14,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\modules\game\models\Game;
-use frontend\models\UserProfile;
+use backend\modules\user\models\UserProfile;
 
 /**
  * Site controller

@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'code',
-            'data_added',
+            'date_added',
             'team',
             'role',
 

@@ -8,7 +8,7 @@ $this->title = 'My Yii Application';
 ?>
 <div class="site-index">
     <div class="body-content">
-        <section class="profile col-md-12">
+        <section class="profile col-md-push-1 col-md-10">
             <div class="img col-md-3">
                 <img src="/images/placeholder.png" />
             </div>
@@ -17,13 +17,11 @@ $this->title = 'My Yii Application';
                 <h2>Member since <?= date('m-d-Y', $model->date_added); ?></h2>
             </div>
             <div class="col-md-12"></div>
-            <div class="history col-md-4">
-                <ul>
-                    <li>DEATHS: <?= $model->deaths; ?></li>
-                    <li>KILLS: <?= $model->kills; ?></li>
-                    <li>GAMES PLAYED: <?= $games_played ?></li>
-                </ul>
-            </div>
+
+            <div class="history col-md-4">DEATHS: <?= $model->deaths; ?></div>
+            <div class="history col-md-4">KILLS: <?= $model->kills; ?></div>
+            <div class="history col-md-4">GAMES PLAYED: <?= $games_played; ?></div>
+
             <div id="games" class="history col-md-4">
                 <?php $nogames=true; foreach($games as $model): ?>
                     <?php

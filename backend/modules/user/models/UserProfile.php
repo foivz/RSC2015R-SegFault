@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $code
- * @property integer $data_added
+ * @property integer $date_added
  * @property string $team
  * @property string $role
  */
@@ -30,13 +30,13 @@ class UserProfile extends \yii\db\ActiveRecord
     {
         return [
             [[], 'required'],
-            [['data_added'], 'integer'],
+            [['date_added'], 'integer'],
             [['code', 'team', 'role', 'username', 'pass'], 'string', 'max' => 255],
         ];
     }
 
     public function beforeSave() {
-        $this->data_added = time();
+        $this->date_added = time();
 
         return $this;
         parent::beforeSave();
@@ -50,7 +50,7 @@ class UserProfile extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'code' => 'Code',
-            'data_added' => 'Data Added',
+            'date_added' => 'Data Added',
             'team' => 'Team',
             'role' => 'Role',
         ];

@@ -78,8 +78,17 @@ class IndexController extends Controller
     public function actionCreateapp()
     {
         header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['user']))
-            echo(json_encode($_POST['user']));
+        if(isset($_POST['user']) && isset($_POST['pass'])) {
+            $model = new UserProfile();
+
+            $model->username = $_POST['user'];
+            $model->pass = $_POST['pass'];
+
+            if($model->save()) return $model->id;
+            else return 'failed';
+        }
+
+        return 'nista';
 
         /*if($_POST) {
             //return 'ok';
