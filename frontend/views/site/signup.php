@@ -19,11 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
 
-        <?= $form->field($model, 'pass')->textInput(['maxlength' => true]) ?>
-
-        <?= $form->field($model, 'team')->textInput(['maxlength' => true]) ?>
-
-        <?= $form->field($model, 'role')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'pass')->textInput(['maxlength' => true, 'type'=>'password']) ?>
 
         <div class="form-group">
             <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
