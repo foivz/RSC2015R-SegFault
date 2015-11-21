@@ -77,7 +77,9 @@ class IndexController extends Controller
 
     public function actionCreateapp()
     {
-        if($_REQUEST) return 'ok';
+        header('Content-type:application/json;charset=utf-8');
+        if($_REQUEST) return json_encode($_REQUEST);
+        else return 'nema nista';
 
         if($_POST) {
             //return 'ok';

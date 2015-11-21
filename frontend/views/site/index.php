@@ -15,7 +15,7 @@ $this->title = 'My Yii Application';
     <div class="body-content">
         <div id="games" class="col-md-6">
             <h2>Current games</h2>
-            <?php  ?>
+            <?php foreach($games as $model): ?>
             <article class="game">
                 <h3>Game 1</h3>
                 <div class="map"><img src="/images/placeholder.png" /></div>
@@ -26,6 +26,7 @@ $this->title = 'My Yii Application';
                 </ul>
                 <p class="time"></p>
             </article>
+            <?php endforeach; ?>
         </div>
 
     </div>
