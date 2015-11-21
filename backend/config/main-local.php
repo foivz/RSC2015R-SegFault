@@ -8,6 +8,9 @@ $config = [
         'game' => [
             'class' => 'backend\modules\game\game',
         ],
+        'posts' => [
+            'class' => 'backend\modules\posts\Posts',
+        ],
     ],
     'components' => [
 	    'assetManager' => [
