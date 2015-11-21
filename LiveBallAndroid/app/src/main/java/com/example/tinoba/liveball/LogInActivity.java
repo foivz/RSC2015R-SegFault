@@ -54,6 +54,7 @@ public class LogInActivity extends AppCompatActivity{
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("BAAAAA", "KURAAAC");
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
 
