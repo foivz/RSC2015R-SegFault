@@ -16,7 +16,7 @@ use yii\filters\VerbFilter;
  */
 class IndexController extends Controller
 {
-    public function behaviors()
+    /*public function behaviors()
     {
         return [
             'verbs' => [
@@ -26,7 +26,7 @@ class IndexController extends Controller
                 ],
             ],
         ];
-    }
+    }*/
 
     /**
      * Lists all Game models.
@@ -132,10 +132,7 @@ class IndexController extends Controller
 
     public function actionMessages()
     {
-
-        $text = $_POST['text'];
-        header('Content-type:application/json;charset=utf-8');
-        echo(json_encode($text));
+        echo json_encode($_POST);
 
     }
 
