@@ -3,6 +3,7 @@
 namespace backend\modules\game\controllers;
 
 use backend\modules\game\models\GameUser;
+use backend\modules\game\models\Message;
 use backend\modules\user\models\UserProfile;
 use Yii;
 use backend\modules\game\models\Game;
@@ -10,6 +11,7 @@ use backend\modules\game\models\GameSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * IndexController implements the CRUD actions for Game model.
@@ -132,9 +134,26 @@ class IndexController extends Controller
 
     public function actionMessages()
     {
+        $message = new Message();
+
         header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['text']))
+        if(isset($_POST['text'])) {
             echo 'proslo';
+            $message->text = $_POST['text'];
+        }
+    }
+
+    public function actionMessagelog($id) {
+        $messages = Message::find()->where(['game_id' => $id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $messages,
+        ]);
+
+        return $this->render('message_log', [
+            'dataProvider' => $dataProvider,
+            'id' => $id,
+        ]);
     }
 
     /**

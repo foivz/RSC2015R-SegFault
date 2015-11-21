@@ -19,10 +19,10 @@ $config = [
         'urlManager' => [
             'class' => 'yii\web\UrlManager',
             // Disable index.php
-            'showScriptName' => true,
+            'showScriptName' => false,
             // Disable r= routes
             //caseSensitive = false;
-            //'enablePrettyUrl' => true,
+            'enablePrettyUrl' => true,
             'rules' => [
                 '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',

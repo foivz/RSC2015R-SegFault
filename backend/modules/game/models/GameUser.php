@@ -28,8 +28,13 @@ class GameUser extends \yii\db\ActiveRecord
     {
         return [
             [[], 'required'],
-            [['user_id', 'game_id', 'location'], 'integer'],
+            [['user_id', 'game_id', 'lat', 'lng'], 'integer'],
         ];
+    }
+
+    public function getGames()
+    {
+        return $this->hasMany(Game::className(), ['id' => 'game_id']);
     }
 
     /**

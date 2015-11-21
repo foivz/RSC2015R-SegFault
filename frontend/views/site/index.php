@@ -18,7 +18,31 @@ $this->title = 'My Yii Application';
             <?php foreach($games as $model): ?>
             <article class="game">
                 <h3><?= $model->name; ?></h3>
-                <div class="map"><img src="/images/placeholder.png" /></div>
+                <div id="map_canvas" style="width:100%; height:300px;"></div>
+                <script>
+                        var map,
+                            service;
+
+                                var latlng = new google.maps.LatLng(-34.397, 150.644);
+
+                                var myOptions = {
+                                    zoom: 1,
+                                    center: latlng,
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+
+                                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+                                var marker = new google.maps.Marker({
+                                    position: latlng,
+                                    map: map
+                                });
+
+                                marker.setMap(map);
+
+
+                </script>
+
                 <ul>
                     <li>SCORE: <?= $model->scoreA; ?>-<?= $model->scoreB; ?></li>
                     <li>START: <?= $model->start; ?></li>

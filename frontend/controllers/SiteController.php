@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use backend\modules\game\models\GameUser;
 use Yii;
 use common\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
@@ -13,6 +14,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\modules\game\models\Game;
+use frontend\models\UserProfile;
 
 /**
  * Site controller
@@ -153,17 +155,35 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $model = new SignupForm();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
-                }
-            }
-        }
+        $model = new UserProfile();
 
-        return $this->render('signup', [
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->code = 'ID'.$model->id.'TEAM'.$model->team;
+            $model->save();
+
+            return $this->redirect(['profile', 'id'=>$model->id]);
+
+        } else {
+            return $this->render('signup', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionProfile($id)
+    {
+        $model = UserProfile::findOne($id);
+        $games = Game::find()->all();
+
+        $games_played = 0;
+        foreach($games as $g)
+            if(GameUser::find()->where(['user_id'=>$id])->all()) $games_played++;
+
+        return $this->render('profile', [
             'model' => $model,
+            'games' => $games,
+            'id' => $id,
+            'games_played' => $games_played,
         ]);
     }
 
