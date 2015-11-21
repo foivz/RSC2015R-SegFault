@@ -131,6 +131,11 @@ class IndexController extends Controller
         }
     }
 
+    public function actionMessages()
+    {
+        return json_encode($_REQUEST);
+    }
+
     /**
      * Deletes an existing Game model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
