@@ -11,18 +11,22 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.tinoba.liveball.models.UserLoginRequest;
+import com.example.tinoba.liveball.retrofit.LoginService;
+import com.example.tinoba.liveball.retrofit.ServiceGenerator;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import retrofit.Call;
 import retrofit.Callback;
-import retrofit.RestAdapter;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class Chat extends AppCompatActivity {
     String text;
-    public static final String ENDPOINT = "http://tinoba.hostzi.com/";
     String[] poruke ={"Napadni", "Cover fire","Lijevo od tebe", "Pomoć","Ispred tebe", "Iza tebe", "Desno od tebe","Povlačenje"};
     ArrayList<String> text1;
     ArrayList<String> text2;
@@ -45,63 +49,62 @@ public class Chat extends AppCompatActivity {
         lista.setAdapter(customAdapter);
         Button gumb1 = (Button)findViewById(R.id.gumb1);
 
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3)
+            {
 
-        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                            @Override
-                                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            }
+        });
 
 
-                                                if (lista.getItemAtPosition(i).equals("Lijevo od tebe")) {
-                                                    RestAdapter adapter = new RestAdapter.Builder()
-                                                            .setEndpoint(ENDPOINT)
-                                                            .build();
-                                                    SlanjePoruka api =  adapter.create(SlanjePoruka.class);
-                                                    api.getFeed("Lijevo od tebe", new Callback<String>() {
-                                                        @Override
-                                                        public void success(String s, Response response) {
-                                                            Log.i("TAG",s);
-                                                        }
-
-                                                        @Override
-                                                        public void failure(RetrofitError retrofitError) {
-                                                            Log.i("TAG","neradi");
-                                                        }
-                                                    });
-
-                                                }
-                                                else if(lista.getItemAtPosition(i).equals("Desno od tebe")){
-                                                    RestAdapter adapter = new RestAdapter.Builder()
-                                                            .setEndpoint(ENDPOINT)
-                                                            .build();
-                                                    SlanjePoruka api =  adapter.create(SlanjePoruka.class);
-                                                    api.getFeed("Desno od tebe", new Callback<String>() {
-                                                        @Override
-                                                        public void success(String s, Response response) {
-                                                            Log.i("TAG",s);
-                                                        }
-
-                                                        @Override
-                                                        public void failure(RetrofitError retrofitError) {
-                                                            Log.i("TAG","neradi");
-                                                        }
-                                                    });
-                                                }
-                                                else{
-                                                    Log.i("TAG","nista");
-                                                }
-                                            }
-                                        }
-        );
 
 
 
     }
     public void prvi(View view){
+        Log.i("TAG","BEZVEZ");
+        LoginService loginService =
+                ServiceGenerator.createService(LoginService.class);
 
+        Call<String> call = loginService.sendMessage("Lijevo od tebe");
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Response<String> response, Retrofit retrofit) {
+                Log.i("TAG", response.message());
+                if (response.body() != null) {
+                    Log.i("TAG", response.body().toString());
+                } else Log.i("TAG", "no body");
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("TAG", t.getMessage());
+            }
+        });
 
 
     }
     public void drugi(View view){
+        LoginService loginService =
+                ServiceGenerator.createService(LoginService.class);
 
+        Call<String> call = loginService.sendMessage("Desno od tebe");
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Response<String> response, Retrofit retrofit) {
+                Log.i("LOG IN", response.message());
+                if (response.body() != null) {
+                    Log.i("LOG IN", response.body().toString());
+                } else Log.i("LOG IN", "no body");
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                Log.e("LOG IN failure", t.getMessage());
+            }
+        });
     }
 }

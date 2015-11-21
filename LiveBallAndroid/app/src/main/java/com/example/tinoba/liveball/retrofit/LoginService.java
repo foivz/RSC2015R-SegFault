@@ -4,7 +4,10 @@ import com.example.tinoba.liveball.models.UserLoginRequest;
 import org.json.JSONObject;
 
 import retrofit.Call;
+import retrofit.Callback;
 import retrofit.http.Body;
+import retrofit.http.Field;
+import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
 /**
@@ -13,4 +16,8 @@ import retrofit.http.POST;
 public interface LoginService {
     @POST("/user/index/createapp")
     Call<JSONObject> basicLogin(@Body UserLoginRequest object);
+
+    @FormUrlEncoded
+    @POST("/game/index/messages")
+    Call<String> sendMessage(@Field("text") String text);
 }
