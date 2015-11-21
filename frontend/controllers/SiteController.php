@@ -76,7 +76,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        //$cookies = Yii::$app->request->cookies;
+        $cookies = Yii::$app->request->cookies;
 
         $games = Game::find()->all();
         $posts = Post::find()->all();
@@ -84,7 +84,7 @@ class SiteController extends Controller
         return $this->render('index', [
             'games' => $games,
             'posts' => $posts,
-            //'cookies' => $cookies,
+            'cookies' => $cookies,
         ]);
     }
 
