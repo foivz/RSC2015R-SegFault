@@ -221,7 +221,7 @@ class SiteController extends Controller
     public function actionUpload() {
         //$model = new File();
         $post = new Post();
-        $file_upload_url = '/uploads/';
+        $file_upload_url = '/uploads';
 
         //var_dump(json_encode($_POST)) or die;
 
