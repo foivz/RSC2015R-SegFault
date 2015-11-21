@@ -78,8 +78,8 @@ class IndexController extends Controller
     public function actionCreateapp()
     {
         header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['text']))
-            echo(json_encode($_POST['username']));
+        if(isset($_POST['user']))
+            echo(json_encode($_POST['user']));
 
         /*if($_POST) {
             //return 'ok';
