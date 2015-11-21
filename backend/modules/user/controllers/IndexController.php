@@ -77,12 +77,11 @@ class IndexController extends Controller
 
     public function actionCreateapp()
     {
-        var_dump($_POST['pass']) or die;
         header('Content-type:application/json;charset=utf-8');
-        if($_POST) return json_encode($_POST);
-        else return 'nema nista';
+        if(isset($_POST['text']))
+            echo(json_encode($_POST['username']));
 
-        if($_POST) {
+        /*if($_POST) {
             //return 'ok';
 
             //return json_encode($_POST);
@@ -90,7 +89,7 @@ class IndexController extends Controller
             $model = new UserProfile();
             $model->username = $_POST['username'];
             $model->pass = $_POST['pass'];
-        }
+        }*/
     }
 
     /**
