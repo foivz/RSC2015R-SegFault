@@ -1,11 +1,15 @@
 <?php
+$pass = '';
+if(defined('YII_ENV') && YII_ENV == 'prod')
+    $pass = 'valejepeder';
+
 return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=rsc_prc',
+            'dsn' => 'mysql:host=127.0.0.1;dbname=rsc_prc',
             'username' => 'root',
-            'password' => '',
+            'password' => $pass,
             'charset' => 'utf8',
         ],
         'mailer' => [
