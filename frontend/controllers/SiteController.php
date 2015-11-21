@@ -47,7 +47,9 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        echo json_encode($_POST);
+        header('Content-type:application/json;charset=utf-8');
+        if(isset($_POST['text']))
+            echo(json_encode($_POST['text']));
     }
 
     /**
