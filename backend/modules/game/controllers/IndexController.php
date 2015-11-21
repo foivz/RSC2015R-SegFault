@@ -96,21 +96,38 @@ class IndexController extends Controller
 
             $i=0; foreach($users_assigned as $user_assigned):
                 if($user_assigned)
-                    $user_ids[$i] = $user_assigned->user_id;
+                    if($user_assigned->team == 'A')
+                        $user_ids['A'][$i] = $user_assigned->user_id;
+                        else $user_ids['B'][$i] = $user_assigned->user_id;
             $i++; endforeach;
         }
 
         //var_dump($_POST) or die;
 
         $i=0; while($i<$model->players_num):
-            if(isset($_POST['user'.$i])) {
-                $assigned = GameUser::find()->where(['user_id' => $_POST['user'.$i], 'game_id' => $model->id])->one();
+            if(isset($_POST['Auser'.$i])) {
+                $assigned = GameUser::find()->where(['team' => 'A', 'user_id' => $_POST['user'.$i], 'game_id' => $model->id])->one();
                 if(!$assigned) $assigned = new GameUser();
                 $assigned->game_id = $model->id;
-                $user_id = $_POST['user' . $i];
+                $user_id = $_POST['Auser' . $i];
+
 
                 if (!$user_id) break;
 
+                $assigned->team = "A";
+                $assigned->user_id = $user_id;
+                if (!$assigned->save()) var_dump($assigned->getErrors()) or die;
+            }
+
+            if(isset($_POST['Buser'.$i])) {
+                $assigned = GameUser::find()->where(['team' => 'B', 'user_id' => $_POST['user'.$i], 'game_id' => $model->id])->one();
+                if(!$assigned) $assigned = new GameUser();
+                $assigned->game_id = $model->id;
+                $user_id = $_POST['Buser' . $i];
+
+                if (!$user_id) break;
+
+                $assigned->team = "B";
                 $assigned->user_id = $user_id;
                 if (!$assigned->save()) var_dump($assigned->getErrors()) or die;
             }

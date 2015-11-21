@@ -33,16 +33,29 @@ use \yii\jui\DatePicker;
 
     <?= $form->field($model, 'scoreB')->textInput() ?>
 
+    <label>Team A</label>
     <?php $i=0; while($i<$model->players_num): ?>
             <?php
             $dropdownCategories = ArrayHelper::map($users, 'id', 'username');
-            echo Html::dropDownList('user'.$i, (isset($user_ids[$i]) ? $user_ids[$i]:'0'), $dropdownCategories, [
+            echo Html::dropDownList('Auser'.$i, (isset($user_ids['A'][$i]) ? $user_ids['A'][$i]:'0'), $dropdownCategories, [
                 'prompt' => 'Odaberi korisnika',
                 'class' => 'form-control',
             ]);
             ?>
             <br />
     <?php $i++; endwhile; ?>
+
+    <label>Team B</label>
+    <?php $i=0; while($i<$model->players_num): ?>
+        <?php
+        $dropdownCategories = ArrayHelper::map($users, 'id', 'username');
+        echo Html::dropDownList('Buser'.$i, (isset($user_ids['B'][$i]) ? $user_ids['B'][$i]:'0'), $dropdownCategories, [
+            'prompt' => 'Odaberi korisnika',
+            'class' => 'form-control',
+        ]);
+        ?>
+        <br />
+        <?php $i++; endwhile; ?>
 
     <?php endif; ?>
 

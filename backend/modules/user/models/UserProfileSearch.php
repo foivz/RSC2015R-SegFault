@@ -18,7 +18,7 @@ class UserProfileSearch extends UserProfile
     public function rules()
     {
         return [
-            [['id', 'data_added'], 'integer'],
+            [['id', 'date_added'], 'integer'],
             [['code', 'team', 'role'], 'safe'],
         ];
     }
@@ -60,7 +60,7 @@ class UserProfileSearch extends UserProfile
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'data_added' => $this->data_added,
+            'date_added' => $this->date_added,
         ]);
 
         $query->andFilterWhere(['like', 'code', $this->code])

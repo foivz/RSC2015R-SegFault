@@ -36,13 +36,13 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
-        //['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'Player registration', 'url' => ['/site/signup']],
         //['label' => 'About', 'url' => ['/site/about']],
         //['label' => 'Contact', 'url' => ['/site/contact']],
     ];
     if (Yii::$app->user->isGuest) {
         //$menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+        $menuItems[] = ['label' => 'ADMIN Login', 'url' => ['/site/login']];
     } else {
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')

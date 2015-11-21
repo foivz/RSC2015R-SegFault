@@ -18,17 +18,17 @@ $this->title = 'My Yii Application';
             </div>
             <div class="col-md-12"></div>
 
-            <div class="history col-md-4">DEATHS: <?= $model->deaths; ?></div>
-            <div class="history col-md-4">KILLS: <?= $model->kills; ?></div>
-            <div class="history col-md-4">GAMES PLAYED: <?= $games_played; ?></div>
+            <div class="history col-md-4"><i class="fa fa-odnoklassniki-square"></i> DEATHS: <?= $model->deaths; ?></div>
+            <div class="history col-md-4"><i class="fa fa-rebel"></i> KILLS: <?= $model->kills; ?></div>
+            <div class="history col-md-4"><i class="fa fa-gamepad"></i> GAMES PLAYED: <?= $games_played; ?></div>
 
-            <div id="games" class="history col-md-4">
+            <div id="games" class="history">
                 <?php $nogames=true; foreach($games as $model): ?>
                     <?php
                     if(!GameUser::find()->where(['user_id'=>$id])->all()) break;
                     $nogames = false;
                     ?>
-                    <article class="game">
+                    <article class="game col-md-4">
                         <h3><?= $model->name; ?></h3>
                         <div id="map_canvas" style="width:100%; height:300px;"></div>
                         <script>
@@ -63,7 +63,7 @@ $this->title = 'My Yii Application';
                         <p class="time"></p>
                     </article>
                 <?php endforeach; ?>
-                <?php if($nogames) echo 'No games'; ?>
+                <?php if($nogames) echo '<div class="col-md-4"><br />No games</div>'; ?>
             </div>
 
         </section>
