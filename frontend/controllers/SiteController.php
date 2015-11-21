@@ -73,11 +73,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $games = Game::find()->all();
-
-        return $this->render('index', [
-            'games' => $games,
-        ]);
+        echo json_encode($_POST);
     }
 
     /**
