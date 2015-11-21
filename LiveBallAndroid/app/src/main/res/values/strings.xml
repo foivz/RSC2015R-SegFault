@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">LiveBall</string>
+    <string name="user_name_placeholder">Korisničko ime</string>
+    <string name="password_placeholder">Lozinka</string>
+    <string name="login_button">PRIJAVA</string>
+    <string name="register_button">REGISTRACIJA</string>
 </resources>
