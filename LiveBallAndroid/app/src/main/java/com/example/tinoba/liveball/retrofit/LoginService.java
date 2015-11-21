@@ -14,8 +14,9 @@ import retrofit.http.POST;
  * Created by antonio on 21/11/15.
  */
 public interface LoginService {
+    @FormUrlEncoded
     @POST("/user/index/createapp")
-    Call<JSONObject> basicLogin(@Body UserLoginRequest object);
+    Call<String> basicLogin(@Field("user") String user, @Field("pass") String pass);
 
     @FormUrlEncoded
     @POST("/game/index/messages")

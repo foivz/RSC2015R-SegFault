@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.tinoba.liveball.db.DBHelper;
 import com.example.tinoba.liveball.models.UserLoginRequest;
 import com.example.tinoba.liveball.models.UserModel;
 import com.example.tinoba.liveball.retrofit.LoginService;
@@ -32,14 +33,16 @@ public class LogInActivity extends AppCompatActivity{
     Button logInButton;
     Button registerButton;
 
-    //View coordinator;
+    UserModel userModel;
+
+    View coordinator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        //coordinator = (View) findViewById(R.id.login_coordinator);
+        coordinator = findViewById(R.id.login_coordinator);
 
         SharedSingleton shared = SharedSingleton.getInstance(getApplicationContext());
 
@@ -57,18 +60,23 @@ public class LogInActivity extends AppCompatActivity{
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("BAAAAA", "KURAAAC");
+                if(!checkValidity()) {
+                    loginFailedMiserably();
+                    return;
+                }
+
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
 
                 UserLoginRequest user = new UserLoginRequest(userNameEditText.getText().toString(), userPassEditText.getText().toString());
+                userModel = new UserModel(0, user.getUser(), user.getPass(), 0, null);
 
-                Call<JSONObject> call = loginService.basicLogin(user);
-                call.enqueue(new Callback<JSONObject>() {
+                Call<String> call = loginService.basicLogin(user.getUser(), user.getPass());
+                call.enqueue(new Callback<String>() {
                     @Override
-                    public void onResponse(Response<JSONObject> response, Retrofit retrofit) {
+                    public void onResponse(Response<String> response, Retrofit retrofit) {
                         Log.i("LOG IN", response.message());
-                        loginSuccess();
+                        loginSuccess(response.body().toString());
                         if (response.body() != null) {
                             Log.i("LOG IN", response.body().toString());
                         } else Log.i("LOG IN", "no body");
@@ -84,13 +92,25 @@ public class LogInActivity extends AppCompatActivity{
 
     }
 
-    private void loginFailedMiserably() {
-        //Snackbar.make(coordinator, "Server error", Snackbar.LENGTH_SHORT).show();
+    private boolean checkValidity() {
+        Log.e("checkValidity", Integer.toString(userNameEditText.getText().length()));
+        if(userNameEditText.getText().length() < 3) return false;
+        if(userPassEditText.getText().length() < 3) return false;
+        return true;
     }
 
-    private void loginSuccess() {
+    private void loginFailedMiserably() {
+        Snackbar.make(coordinator, "Server error", Snackbar.LENGTH_SHORT).show();
+    }
+
+    private void loginSuccess(String id) {
+        userModel.setId(Integer.parseInt(id));
+        DBHelper dbHelper = new DBHelper(getApplicationContext());
+        dbHelper.writeUser(userModel);
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
+
     }
 
 

@@ -17,10 +17,10 @@ public class Database {
 
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + " ("+
                 COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_NAME + " TEXT NOT NULL, " +
-                COLUMN_EMAIL + " TEXT NOT NULL, " +
-                COLUMN_ADMIN + " INTEGER NOT NULL DEFAULT 0" +
-                COLUMN_AUTH_KEY + " TEXT NOT NULL " + ")";
+                COLUMN_NAME + " TEXT, " +
+                COLUMN_EMAIL + " TEXT, " +
+                COLUMN_ADMIN + " INTEGER DEFAULT 0, " +
+                COLUMN_AUTH_KEY + " TEXT" + ")";
 
     }
 }

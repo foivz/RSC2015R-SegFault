@@ -30,14 +30,10 @@ public class ServiceGenerator {
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         httpClient.interceptors().add(logging);
 
-
         Retrofit retrofit = builder.client(httpClient).build();
         return retrofit.create(serviceClass);
     }
 }
-
-
-
 
 
 //public class ServiceGenerator {

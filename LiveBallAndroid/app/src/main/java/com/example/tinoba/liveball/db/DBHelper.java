@@ -29,7 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addUser(UserModel user){
+    public void writeUser(UserModel user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Database.usersTable.COLUMN_NAME, user.getUsername());

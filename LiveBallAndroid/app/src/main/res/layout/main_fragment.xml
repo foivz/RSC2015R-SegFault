@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="@string/i_dead_button"
+        style="@style/big_button_style"
+        android:layout_margin="15dp"
+        android:id="@+id/dead_button" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/dead_button">
+        
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp" />
+        
+        
+    </RelativeLayout>
+    
+
+
+</CoordinatorLayout>
