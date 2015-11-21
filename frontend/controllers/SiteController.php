@@ -88,6 +88,31 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionVote($id = null)
+    {
+        $cookies = \Yii::$app->request->cookies;
+
+        $post = Post::findOne($id);
+        if($post) {
+            if($cookies->getValue('voted', 0)) return 0;
+            else {
+                $post->vote++;
+                $post->save();
+
+                $cookies = \Yii::$app->response->cookies;
+
+                $cookies->add(new Cookie([
+                    'name' => 'voted',
+                    'value' => '1',
+                ]));
+
+                return $post->vote;
+            }
+        }
+
+        return 0;
+    }
+
     /**
      * Logs in a user.
      *
@@ -196,7 +221,7 @@ class SiteController extends Controller
     public function actionUpload() {
         //$model = new File();
         $post = new Post();
-        $file_upload_url = '/uploads';
+        $file_upload_url = '/uploads/';
 
         //var_dump(json_encode($_POST)) or die;
 
