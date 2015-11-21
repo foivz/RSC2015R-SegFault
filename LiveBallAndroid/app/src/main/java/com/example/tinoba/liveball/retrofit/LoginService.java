@@ -1,11 +1,10 @@
 package com.example.tinoba.liveball.retrofit;
 
-import com.example.tinoba.liveball.models.UserModel;
-
-import org.json.JSONArray;
+import com.example.tinoba.liveball.models.UserLoginRequest;
 import org.json.JSONObject;
 
 import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.POST;
 
 /**
@@ -13,5 +12,5 @@ import retrofit.http.POST;
  */
 public interface LoginService {
     @POST("/user/index/createapp")
-    Call<JSONArray> basicLogin();
+    Call<JSONObject> basicLogin(@Body UserLoginRequest object);
 }

@@ -8,12 +8,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.tinoba.liveball.models.UserLoginRequest;
+import com.example.tinoba.liveball.models.UserModel;
 import com.example.tinoba.liveball.retrofit.LoginService;
 import com.example.tinoba.liveball.retrofit.ServiceGenerator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -51,18 +55,18 @@ public class LogInActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 LoginService loginService =
-                        ServiceGenerator.createService(LoginService.class, userNameEditText.getText().toString(), userPassEditText.getText().toString());
-                Call<JSONArray> call = loginService.basicLogin();
-                call.enqueue(new Callback<JSONArray>() {
+                        ServiceGenerator.createService(LoginService.class);
+
+                UserLoginRequest user = new UserLoginRequest(userNameEditText.getText().toString(), userPassEditText.getText().toString());
+
+                Call<JSONObject> call = loginService.basicLogin(user);
+                call.enqueue(new Callback<JSONObject>() {
                     @Override
-                    public void onResponse(Response<JSONArray> response, Retrofit retrofit) {
+                    public void onResponse(Response<JSONObject> response, Retrofit retrofit) {
                         Log.i("LOG IN", response.message());
-                        if (response.body() != null) try {
-                            Log.i("LOG IN", response.body().getJSONArray(0).toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        else Log.i("LOG IN", "no body");
+                        if (response.body() != null) {
+                            Log.i("LOG IN", response.body().toString());
+                        } else Log.i("LOG IN", "no body");
                     }
                     @Override
                     public void onFailure(Throwable t) {
