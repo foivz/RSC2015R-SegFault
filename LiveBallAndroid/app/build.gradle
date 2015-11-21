@@ -33,6 +33,5 @@ dependencies {
     compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okhttp:logging-interceptor:2.6.0-SNAPSHOT'
-
-
+    compile 'com.android.support:design:23.1.0'
 }
