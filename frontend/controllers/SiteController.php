@@ -22,7 +22,33 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['logout', 'signup'],
+                'rules' => [
+                    [
+                        'actions' => ['signup'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * @inheritdoc
@@ -47,9 +73,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['text']))
-            echo(json_encode($_POST['text']));
+        $games = Game::find()->all();
+
+        return $this->render('index', [
+            'games' => $games,
+        ]);
     }
 
     /**
