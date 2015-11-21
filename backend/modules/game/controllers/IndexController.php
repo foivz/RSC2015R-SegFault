@@ -132,9 +132,11 @@ class IndexController extends Controller
 
     public function actionMessages()
     {
+
+        $text = $_POST['text'];
         header('Content-type:application/json;charset=utf-8');
-        if($_REQUEST) return json_encode($_REQUEST);
-        else return 'nema nista';
+        echo(json_encode($text));
+
     }
 
     /**

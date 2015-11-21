@@ -17,12 +17,12 @@ $this->title = 'My Yii Application';
             <h2>Current games</h2>
             <?php foreach($games as $model): ?>
             <article class="game">
-                <h3>Game 1</h3>
+                <h3><?= $model->name; ?></h3>
                 <div class="map"><img src="/images/placeholder.png" /></div>
                 <ul>
-                    <li>SCORE: 5-6</li>
-                    <li>START: 16:00</li>
-                    <li>END: 16:45</li>
+                    <li>SCORE: <?= $model->scoreA; ?>-<?= $model->scoreB; ?></li>
+                    <li>START: <?= $model->start; ?></li>
+                    <li>END: <?= $model->end; ?></li>
                 </ul>
                 <p class="time"></p>
             </article>

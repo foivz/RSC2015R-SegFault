@@ -12,6 +12,7 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use backend\modules\game\models\Game;
 
 /**
  * Site controller
@@ -72,7 +73,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $games = Game::find()->all();
+
+        return $this->render('index', [
+            'games' => $games,
+        ]);
     }
 
     /**
