@@ -77,7 +77,7 @@ class IndexController extends Controller
 
     public function actionCreateapp()
     {
-        if(isset($_POST)) {
+        if($_POST) {
             return 'ok';
 
             $model = new UserProfile();

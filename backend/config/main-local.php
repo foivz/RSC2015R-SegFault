@@ -5,6 +5,9 @@ $config = [
         'user' => [
             'class' => 'backend\modules\user\user',
         ],
+        'game' => [
+            'class' => 'backend\modules\game\game',
+        ],
     ],
     'components' => [
 	    'assetManager' => [
