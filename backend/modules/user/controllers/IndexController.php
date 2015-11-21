@@ -78,7 +78,9 @@ class IndexController extends Controller
     public function actionCreateapp()
     {
         if($_POST) {
-            return 'ok';
+            //return 'ok';
+
+            return json_encode($_POST);
 
             $model = new UserProfile();
             $model->username = $_POST['username'];
