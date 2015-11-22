@@ -43,9 +43,9 @@ public class SharedSingleton {
         editor.commit();
     }
 
-    public void putUserLoggedPrefs(boolean state){
+    public void putUserLoggedPrefs(int id){
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean(USER_LOGGED_PREFS, state);
+        editor.putInt(USER_LOGGED_PREFS, id);
         editor.commit();
     }
 
@@ -57,8 +57,8 @@ public class SharedSingleton {
         return sharedPreferences.getString(USER_NEMAIL_PREFS, null);
     }
 
-    public boolean getUserLoggedPrefs(){
-        return sharedPreferences.getBoolean(USER_LOGGED_PREFS, false);
+    public int getUserLoggedPrefs(){
+        return sharedPreferences.getInt(USER_LOGGED_PREFS, 0);
     }
 
 }
