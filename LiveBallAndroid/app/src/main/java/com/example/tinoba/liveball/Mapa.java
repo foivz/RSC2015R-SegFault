@@ -77,22 +77,15 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
-
         LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
         boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
         final Location location;
         final GoogleMap mMap;
         mMap = googleMap;
 
-
-
         if (network_enabled) {
             if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-
-
 
             }
 
@@ -104,8 +97,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                     podaci = new ArrayList<Igrac>();
 
                     while (true) {
-
-
                         if (location != null) {
                             longitude = location.getLongitude();
                             latitude = location.getLatitude();
@@ -138,7 +129,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                                 CameraUpdate zoom = CameraUpdateFactory.zoomTo(20);
                                 mMap.moveCamera(center);
                                 mMap.animateCamera(zoom);
-
                             }
 
                             @Override
@@ -158,33 +148,12 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }
             };
             thread.start();
-
-
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
     }
-
-
-
 
     public void onLocationChanged(Location location) {
         Log.i("TAG","bok");
@@ -213,15 +182,5 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             Log.i("Security Permission", "not granted");
         }
 
-
-
-
     }
-
-
-
-
-
-
-
 }

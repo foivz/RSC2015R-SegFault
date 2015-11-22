@@ -40,7 +40,7 @@ public class Pocetak_igre extends AppCompatActivity {
                         call.enqueue(new Callback<String>(){
                             @Override
                             public void onResponse(Response<String> response, Retrofit retrofit) {
-                                if (response.body().toString().equals("LIVE")) {
+                                if (!response.body().toString().equals("NOT_LIVE")) {
                                     Log.i("TAG", response.body().toString());
                                    // thread.notifyAll();
                                     flag = false;
@@ -69,9 +69,7 @@ public class Pocetak_igre extends AppCompatActivity {
 
             }
         };
-
         thread.start();
-
     }
 
     private void startMainActivity() {
