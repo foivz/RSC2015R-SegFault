@@ -36,6 +36,8 @@ AppAsset::register($this);
         ],
     ]);
     $menuItems = [
+        ['label' => 'Profil_1', 'url' => ['/site/profile/16']],
+        ['label' => 'Profil_2', 'url' => ['/site/profile/17']],
         ['label' => 'Player registration', 'url' => ['/site/signup']],
         //['label' => 'About', 'url' => ['/site/about']],
         //['label' => 'Contact', 'url' => ['/site/contact']],
