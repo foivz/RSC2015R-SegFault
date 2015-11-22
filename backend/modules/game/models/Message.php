@@ -29,7 +29,7 @@ class Message extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['game_id', 'user_id', 'text', 'date_added'], 'required'],
+            [[], 'required'],
             [['game_id', 'user_id', 'date_added'], 'integer'],
             [['text'], 'string'],
         ];
