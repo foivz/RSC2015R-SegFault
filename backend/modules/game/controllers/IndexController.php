@@ -155,10 +155,10 @@ class IndexController extends Controller
         $message = new Message();
 
         header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['text']) && isset($_POST['game_id']) && isset($_POST['id'])) {
+        if(isset($_POST['text']) && isset($_POST['game']) && isset($_POST['id'])) {
             //echo 'proslo';
             $message->user_id = $_POST['id'];
-            $message->game_id = $_POST['game_id'];
+            $message->game_id = $_POST['game'];
             $message->text = $_POST['text'];
 
             if($message->save()) return 'ok';
