@@ -1,8 +1,11 @@
 package com.example.tinoba.liveball;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.LocationManager;
+import android.nfc.NfcAdapter;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     final Handler handler = new Handler();
     private LocationManager locationManager;
     private String provider;
+    private NfcAdapter mNfcAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+
+        if (mNfcAdapter == null) {
+            // Stop here, we definitely need NFC
+            Toast.makeText(this, "This device doesn't support NFC.", Toast.LENGTH_LONG).show();
+            finish();
+            return;
+
+        }
 
 
     }
@@ -144,4 +158,29 @@ public class MainActivity extends AppCompatActivity {
         };
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        PendingIntent intent = PendingIntent.getActivity(this, 0, new Intent(this,
+                getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+
+        mNfcAdapter.getDefaultAdapter(this).enableForegroundDispatch(this, intent, null, null);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mNfcAdapter.getDefaultAdapter(this) != null)
+            mNfcAdapter.getDefaultAdapter(this).disableForegroundDispatch(this);
+
+
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Log.d("KEFKEF","Intent uhvaćen");
+        MainFragment fragment = (MainFragment) selectionsPagerAdapter.getItem(0);
+        fragment.setNfcTextView("ZASTAVA");
+    }
 }

@@ -10,4 +10,5 @@
     <string name="or">(or)</string>
     <string name="btnUploadToServer">Upload to Server</string>
     <string name="i_dead_button">UBIJEN</string>
+    <string name="flag_title_text">NFC</string>
 </resources>
