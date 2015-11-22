@@ -181,6 +181,8 @@ class IndexController extends Controller
         if(isset($_POST['id'])) {
             $users = GameUser::find()->where(['user_id'=>$_POST['id']])->all();
 
+            return $_POST['id'];
+
             foreach($users as $u) {
                 $game = Game::findOne($u->game_id);
                 if($game->live) return $game->id;
