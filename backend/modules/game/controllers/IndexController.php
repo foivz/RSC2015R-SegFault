@@ -161,7 +161,7 @@ class IndexController extends Controller
             $message->game_id = $_POST['game_id'];
             $message->text = $_POST['text'];
 
-            return $message->save();
+            return $message->getErrors();
         }
     }
 
