@@ -104,7 +104,7 @@ class IndexController extends Controller
 
         //var_dump($_POST) or die;
 
-        $i=0; while($i<$model->players_num):
+        $i=0; while($i<$model->players_num*2):
             if(isset($_POST['Auser'.$i])) {
                 $assigned = GameUser::find()->where(['team' => 'A', 'user_id' => $_POST['Auser'.$i], 'game_id' => $model->id])->one();
                 if(!$assigned) $assigned = new GameUser();
