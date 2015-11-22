@@ -28,7 +28,8 @@ class GameUser extends \yii\db\ActiveRecord
     {
         return [
             [[], 'required'],
-            [['user_id', 'game_id', 'lat', 'lng'], 'integer'],
+            [['user_id', 'game_id'], 'integer'],
+            [['lat', 'lng'], 'safe'],
         ];
     }
 
