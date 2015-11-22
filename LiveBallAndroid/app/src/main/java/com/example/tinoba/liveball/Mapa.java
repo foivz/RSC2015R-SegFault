@@ -136,7 +136,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                                 Log.e("TAG", t.getMessage());
                             }
                         });
-                     //   mMap.setMyLocationEnabled(true);
+                        //   mMap.setMyLocationEnabled(true);
 
                         //mMap.moveCamera(CameraUpdateFactory.newLatLng(pozicija));
                         LocationManager locationManager = (LocationManager)
