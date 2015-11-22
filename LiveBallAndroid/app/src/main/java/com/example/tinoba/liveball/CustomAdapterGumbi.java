@@ -45,7 +45,7 @@ public class CustomAdapterGumbi extends ArrayAdapter<String>{
         button1.setText(text1.get(position).toString());
         button2.setText(text2.get(position).toString());
         if(button2.getText().equals("Mrtav")){
-            button2.setBackgroundColor(Color.argb(255,194,89,48));
+            button2.setBackgroundColor(Color.argb(255,227,24,24));
         }
         button1.setOnClickListener(new View.OnClickListener() {
             @Override

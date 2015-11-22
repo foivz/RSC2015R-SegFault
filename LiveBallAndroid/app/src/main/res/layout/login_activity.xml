@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/login_coordinator"
     android:layout_gravity="center_vertical"
-    android:background="@color/white"
+    android:background="#ebdfdf"
     android:padding="50dp">
 
     <Button
@@ -38,7 +38,7 @@
         android:id="@+id/login_button"
         android:text="@string/login_button"
         style="@style/large_text_dark"
-        android:background="@color/btn_bg"
+        android:background="#c4bcbc"
         android:layout_gravity="center_horizontal"
         android:padding="10dp"
         android:layout_margin="20dp"/>
