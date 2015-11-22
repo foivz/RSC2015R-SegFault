@@ -166,8 +166,8 @@ public class UploadImage extends Activity {
                 entity.addPart("image", new FileBody(sourceFile));
 
                 // Extra parameters if you want to pass to server
-                entity.addPart("title",new StringBody("PRC"));
-                entity.addPart("text", new StringBody("prc na sliku"));
+                //entity.addPart("title",new StringBody("PRC"));
+                //entity.addPart("text", new StringBody("prc na sliku"));
 
                 totalSize = entity.getContentLength();
                 httppost.setEntity(entity);
