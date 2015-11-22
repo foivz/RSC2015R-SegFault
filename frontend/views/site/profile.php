@@ -19,7 +19,7 @@ $this->title = 'My Yii Application';
             <div class="col-md-12"></div>
 
             <div class="history col-md-4"><i class="fa fa-odnoklassniki-square"></i> DEATHS: <?= $model->deaths; ?></div>
-            <div class="history col-md-4"><i class="fa fa-rebel"></i> KILLS: <?= $model->kills; ?></div>
+            <div class="history col-md-4"><i class="fa fa-rebel"></i> FLAGS: <?= $model->kills; ?></div>
             <div class="history col-md-4"><i class="fa fa-gamepad"></i> GAMES PLAYED: <?= $games_played; ?></div>
 
             <div id="games" class="history">
