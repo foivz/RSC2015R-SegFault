@@ -183,7 +183,7 @@ class IndexController extends Controller
 
             foreach($users as $u) {
                 $game = Game::findOne($u->game_id);
-                if($game->live) return $game->id;
+                if($game->live) return $_POST['id'];
             }
 
             return 'NOT_LIVE';
