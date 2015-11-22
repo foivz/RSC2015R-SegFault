@@ -53,6 +53,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     private ArrayList<Igrac> podaci;
     double longitude = 0;
     double latitude = 0;
+    Boolean stani = true;
 
 
     @Override
@@ -96,7 +97,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                 public void run() {
                     podaci = new ArrayList<Igrac>();
 
-                    while (true) {
+                    while (stani) {
                         if (location != null) {
                             longitude = location.getLongitude();
                             latitude = location.getLatitude();
@@ -182,4 +183,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         }
 
     }
+
+
 }

@@ -36,7 +36,7 @@ public class Pocetak_igre extends AppCompatActivity {
                             ServiceGenerator.createService(LoginService.class);
                     flag = true;
                     while (flag){
-                        Call<String> call = loginService.pocetak("6");
+                        Call<String> call = loginService.pocetak(MainActivity.id_);
                         call.enqueue(new Callback<String>(){
                             @Override
                             public void onResponse(Response<String> response, Retrofit retrofit) {
@@ -46,7 +46,7 @@ public class Pocetak_igre extends AppCompatActivity {
                                     MainActivity.game = response.body().toString();
                                     flag = false;
                                     startMainActivity();
-                                } else Log.i("TAG", "no body");
+                                } else Log.i("TAG", response.message());
                                 Toast.makeText(Pocetak_igre.this, response.body(), Toast.LENGTH_LONG).show();
                             }
 

@@ -73,11 +73,12 @@ public class OtherFragment extends Fragment {
                             if (response.body() != null) {
                                 Log.i("TAG", response.body().toString());
                                 for (String s : response.body()) {
-                                    Toast toast = Toast.makeText(getContext(), s, Toast.LENGTH_LONG);
-                                    RelativeLayout toastLayout = (RelativeLayout) toast.getView();
-                                    TextView toastTV = (TextView) toastLayout.getChildAt(0);
-                                    toastTV.setTextSize(70);
-                                    toast.show();
+                                     Toast.makeText(getContext(), s, Toast.LENGTH_LONG).show();
+
+                                  //  RelativeLayout toastLayout = (RelativeLayout) toast.getView();
+                                   // TextView toastTV = (TextView) toastLayout.getChildAt(0);
+                                  //  toastTV.setTextSize(70);
+                                   // toast.show();
                                     Vibrator mVibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
                                     mVibrator.vibrate(800);
                                 }
@@ -88,7 +89,7 @@ public class OtherFragment extends Fragment {
                         @Override
                         public void onFailure(Throwable t) {
                             Log.e("TAG", t.getMessage());
-                            Toast.makeText(getContext(), "ne radi", Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getContext(), "ne radi", Toast.LENGTH_LONG).show();
                         }
                     });
                     try {

@@ -9,7 +9,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:text="@string/i_dead_button"
+        android:text="Mapa"
         style="@style/big_button_style"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="15dp"
