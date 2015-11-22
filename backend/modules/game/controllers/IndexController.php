@@ -186,7 +186,7 @@ class IndexController extends Controller
                 if($game->live) return $_POST['id'];
             }
 
-            return 'NOT_LIVE';
+            return $_POST['id'];
         }
 
         return 'nista';
