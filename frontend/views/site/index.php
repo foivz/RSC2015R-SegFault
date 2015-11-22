@@ -58,9 +58,9 @@ $this->title = 'My Yii Application';
                 </script>
 
                 <ul>
-                    <li>SCORE: <?= $model->scoreA; ?>-<?= $model->scoreB; ?></li>
-                    <li>START: <?= $model->start; ?></li>
-                    <li>END: <?= $model->end; ?></li>
+                    <li style="width:100%;text-align: center"><h2>REDTEAM <?= $model->scoreA; ?>-<?= $model->scoreB; ?> BLUETEAM</h2></li>
+                    <!--<li>START: <?= $model->start; ?></li>
+                    <li>END: <?= $model->end; ?></li>-->
                 </ul>
                 <p class="time"></p>
             </article>

@@ -183,7 +183,7 @@ class IndexController extends Controller
 
             foreach($users as $u) {
                 $game = Game::findOne($u->game_id);
-                if($game->live) return 'LIVE';
+                if($game->live) return $game->id;
             }
 
             return 'NOT_LIVE';
@@ -202,7 +202,7 @@ class IndexController extends Controller
             if($user->team == 'A') $game->scoreA++;
             else $game->scoreB++;
 
-            if($game->save()) return 'ok';;
+            if($game->save()) return 'ok';
         }
 
         return 'nista';
