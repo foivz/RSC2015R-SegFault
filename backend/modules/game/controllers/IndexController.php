@@ -184,8 +184,8 @@ class IndexController extends Controller
                 foreach($ids as $id) {
                     if($id == $_POST['id']) $skip = true;
                 }
-                if(!$skip)$m->ids = $m->ids.$_POST['id'].';';
-                $m->save();
+                if(!$skip) $m->ids = $m->ids.$_POST['id'].';';
+                if(!$skip) $m->save();
 
                 if($skip) break;
                 else $data[$i] = $m->text;
