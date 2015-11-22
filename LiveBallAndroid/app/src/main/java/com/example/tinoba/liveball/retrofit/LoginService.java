@@ -36,4 +36,9 @@ public interface LoginService {
     @FormUrlEncoded
     @POST("/game/index/start")
     Call<String> pocetak(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("/game/index/score")
+    Call<ArrayList<String>> flagCaptured(@Field("game") String game, @Field("id") String id);
+
 }

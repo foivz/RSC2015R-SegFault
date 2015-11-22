@@ -20,6 +20,7 @@ public class MainFragment extends Fragment {
     TextView nfcTextView;
     private int userId;
     private boolean userStatus = true;
+    UserModel user;
     View prvi;
     View drugi;
     View treci;
@@ -43,7 +44,7 @@ public class MainFragment extends Fragment {
         SharedSingleton prefs = SharedSingleton.getInstance(getContext());
         userId = prefs.getUserLoggedPrefs();
         DBHelper dbHelper = new DBHelper(getContext());
-        UserModel user = dbHelper.getUser(userId);
+        user = dbHelper.getUser(userId);
 
         userNameTextView.setText(user.getUsername());
 
@@ -64,6 +65,9 @@ public class MainFragment extends Fragment {
         if(view == 1) drugi.setBackgroundColor(Color.parseColor("#2222CC"));
         if(view == 2) treci.setBackgroundColor(Color.parseColor("#2222CC"));
         if(view == 3) cetvrti.setBackgroundColor(Color.parseColor("#2222CC"));
+
+
+
     }
 
 }
