@@ -213,8 +213,11 @@ class IndexController extends Controller
                 $m->save();
 
                 if($skip) break;
-                else $data[$i] = $m->text;
-            $i++; }
+                else {
+                    $data[$i] = $m->text;
+                    $i++;
+                }
+            }
 
             //if(empty($data)) return 'prazno';
             return json_encode($data);
