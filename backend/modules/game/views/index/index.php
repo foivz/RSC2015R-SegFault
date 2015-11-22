@@ -32,6 +32,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'start',
             'end',
+            [
+                'attribute' => 'LIVE',
+                'format' => 'raw',
+                'value' => function ($model, $index) {
+                    return Html::checkbox('live[]', $model->live, [
+                        'value' => $index,
+                        'data-id' => $model->id,
+                        'data-type' => 'Game',
+                        'class' => 'live',
+                    ]);
+                },
+
+            ],
             // 'scoreA',
             // 'scoreB',
 

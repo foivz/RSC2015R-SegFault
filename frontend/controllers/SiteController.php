@@ -16,6 +16,7 @@ use yii\filters\AccessControl;
 use backend\modules\game\models\Game;
 use backend\modules\user\models\UserProfile;
 use frontend\models\Post;
+use yii\web\Cookie;
 
 /**
  * Site controller
@@ -78,7 +79,7 @@ class SiteController extends Controller
     {
         $cookies = Yii::$app->request->cookies;
 
-        $games = Game::find()->all();
+        $games = Game::find()->where(['live'=>1])->all();
         $posts = Post::find()->all();
 
         return $this->render('index', [
@@ -86,6 +87,60 @@ class SiteController extends Controller
             'posts' => $posts,
             'cookies' => $cookies,
         ]);
+    }
+
+    public function actionRefresh($id=null) {
+        //var_dump($id) or die;
+        $model = Game::findOne($id);
+        $players = GameUser::find()->where(['game_id'=>$model->id])->all();
+
+        $data = '
+                <h3>'.$model->name.'</h3>
+                <div game-id="'.$model->id.'" class="button">Refresh <i class="fa fa-refresh"></i></div>
+                <div id="map_canvas" style="width:100%; height:300px;"></div>
+                <script>
+                        var map,
+                            service;
+
+                                var latlng = new google.maps.LatLng('.$players[0]->lat.', '.$players[0]->lng.');
+
+                                var myOptions = {
+                                    zoom: 20,
+                                    center: latlng,
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+
+                                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        ';
+        $blue = '"http://maps.google.com/mapfiles/ms/icons/red-dot.png"';
+        $red = '"http://maps.google.com/mapfiles/ms/icons/red-dot.png"';
+
+        foreach($players as $player):
+            $data = $data.'
+            var latlng_marker = new google.maps.LatLng('.$player->lat.', '.$player->lng.');
+
+
+            var marker = new google.maps.Marker({
+                position: latlng_marker,
+                icon: '.($player->team=="A" ? $blue:$red).',
+            map: map
+            });
+
+            marker.setMap(map);';
+        endforeach;
+
+        $data = $data.'
+                </script>
+
+                <ul>
+                <li>SCORE: '.$model->scoreA.'-'.$model->scoreB.'</li>
+                <li>START: '.$model->start.'</li>
+                <li>END: '.$model->end.'</li>
+                </ul>
+                <p class="time"></p>
+                ';
+
+        return $data;
     }
 
     public function actionVote($id = null)

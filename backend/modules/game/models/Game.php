@@ -61,8 +61,8 @@ class Game extends \yii\db\ActiveRecord
             'id' => 'ID',
             'date_added' => 'Data Added',
             'name' => 'Name',
-            'start' => 'Start',
-            'end' => 'End',
+            'start' => 'Start ETA',
+            'end' => 'End ETA',
             'scoreA' => 'Score A',
             'scoreB' => 'Score B',
         ];

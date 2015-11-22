@@ -16,17 +16,22 @@ $this->title = 'My Yii Application';
         <div id="games" class="col-md-7">
             <h2>Current games</h2>
             <?php foreach($games as $model): ?>
-            <article class="game">
+            <article id="game<?= $model->id; ?>" game-id="<?= $model->id; ?>" class="game">
                 <h3><?= $model->name; ?></h3>
+                <div game-id="<?= $model->id; ?>" class="button">Refresh <i class="fa fa-refresh"></i></div>
                 <div id="map_canvas" style="width:100%; height:300px;"></div>
                 <script>
                         var map,
                             service;
 
-                                var latlng = new google.maps.LatLng(-34.397, 150.644);
+                        <?php
+                            $players = \backend\modules\game\models\GameUser::find()->where(['game_id'=>$model->id])->all();
+                        ?>
+
+                                var latlng = new google.maps.LatLng(<?= $players[0]->lat ?>, <?= $players[0]->lng ?>);
 
                                 var myOptions = {
-                                    zoom: 1,
+                                    zoom: 20,
                                     center: latlng,
                                     mapTypeId: google.maps.MapTypeId.ROADMAP
                                 };
@@ -34,7 +39,6 @@ $this->title = 'My Yii Application';
                                 map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
                         <?php
-                            $players = \backend\modules\game\models\GameUser::find()->where(['game_id'=>$model->id])->all();
                             foreach($players as $player):
                         ?>
                                 var latlng_marker = new google.maps.LatLng(<?= $player->lat ?>, <?= $player->lng ?>);
@@ -61,8 +65,10 @@ $this->title = 'My Yii Application';
                 <p class="time"></p>
             </article>
             <?php endforeach; ?>
+            <?= (!$games ? 'No live games..':'') ?>
         </div>
-        <section class="col-md-5">
+        <section id="posts" class="col-md-5">
+            <h2>Posts</h2>
             <?php foreach($posts as $model): ?>
                 <article class="row post">
                     <h3><?= $model->title ?></h3>
@@ -72,6 +78,7 @@ $this->title = 'My Yii Application';
                     <p vote-id="<?= $model->id; ?>" class="vote <?= ($cookies->getValue('voted', 0) ? 'voted':'voteup') ?>"><l class="fa fa-thumbs-up"></l> Vote <?= ($cookies->getValue('voted', 0) ? '+'.$model->vote:'') ?></p>
                 </article>
             <?php endforeach; ?>
+            <?= (!$posts ? 'No posts..':'') ?>
         </section>
 
     </div>

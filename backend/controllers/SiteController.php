@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use backend\modules\game\models\Game;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -22,7 +23,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', ''],
+                        'actions' => ['login', 'error', 'togglelive'],
                         'allow' => true,
                     ],
                     [
@@ -88,6 +89,21 @@ class SiteController extends Controller
         return $this->render('signup', [
             'model' => $model,
         ]);
+    }
+
+    public function actionTogglelive($id=null, $name=null) {
+        switch($name) {
+            case 'Game':
+                $model = Game::findOne($id);
+                if($model->live)
+                    $model->live = 0;
+                else
+                    $model->live = 1;
+            break;
+        }
+
+        if($model) return $model->save();
+        else return 0;
     }
 
     public function actionLogout()

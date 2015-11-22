@@ -106,7 +106,7 @@ class IndexController extends Controller
 
         $i=0; while($i<$model->players_num):
             if(isset($_POST['Auser'.$i])) {
-                $assigned = GameUser::find()->where(['team' => 'A', 'user_id' => $_POST['user'.$i], 'game_id' => $model->id])->one();
+                $assigned = GameUser::find()->where(['team' => 'A', 'user_id' => $_POST['Auser'.$i], 'game_id' => $model->id])->one();
                 if(!$assigned) $assigned = new GameUser();
                 $assigned->game_id = $model->id;
                 $user_id = $_POST['Auser' . $i];
@@ -120,7 +120,7 @@ class IndexController extends Controller
             }
 
             if(isset($_POST['Buser'.$i])) {
-                $assigned = GameUser::find()->where(['team' => 'B', 'user_id' => $_POST['user'.$i], 'game_id' => $model->id])->one();
+                $assigned = GameUser::find()->where(['team' => 'B', 'user_id' => $_POST['Buser'.$i], 'game_id' => $model->id])->one();
                 if(!$assigned) $assigned = new GameUser();
                 $assigned->game_id = $model->id;
                 $user_id = $_POST['Buser' . $i];
@@ -133,7 +133,8 @@ class IndexController extends Controller
             }
         $i++; endwhile;
 
-        $model->date = date('d.m.Y', $model->date);
+        if($model->date != 0)
+            $model->date = date('d.m.Y', $model->date);
 
         //var_dump($user_ids) or die;
 
