@@ -30,7 +30,7 @@ $this->title = 'My Yii Application';
                     ?>
                     <article class="game col-md-4">
                         <h3><?= $model->name; ?></h3>
-                        <div id="map_canvas" style="width:100%; height:300px;"></div>
+                        <div id="map_canvas<?= $model->id; ?>" style="width:100%; height:300px;"></div>
                         <script>
                             var map,
                                 service;
@@ -43,7 +43,7 @@ $this->title = 'My Yii Application';
                                 mapTypeId: google.maps.MapTypeId.ROADMAP
                             };
 
-                            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                            map = new google.maps.Map(document.getElementById("map_canvas<?= $model->id; ?>"), myOptions);
 
                             var marker = new google.maps.Marker({
                                 position: latlng,
