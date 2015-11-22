@@ -191,6 +191,7 @@ class IndexController extends Controller
                 else $data[$i] = $m->text;
             $i++; }
 
+            if(!$data) return 'prazno';
             return json_encode($data);
         }
 
