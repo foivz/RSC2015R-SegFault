@@ -49,7 +49,7 @@ public class CustomAdapterGumbi extends ArrayAdapter<String>{
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
 
-                Call<String> call = loginService.sendMessage(text1.get(position).toString());
+                Call<String> call = loginService.sendMessage(text1.get(position).toString(),"6", "1");
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Response<String> response, Retrofit retrofit) {
@@ -77,7 +77,7 @@ public class CustomAdapterGumbi extends ArrayAdapter<String>{
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
 
-                Call<String> call = loginService.sendMessage(text2.get(position).toString());
+                Call<String> call = loginService.sendMessage(text2.get(position).toString(),"6","1");
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Response<String> response, Retrofit retrofit) {

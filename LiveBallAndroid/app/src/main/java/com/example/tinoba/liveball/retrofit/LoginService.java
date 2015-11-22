@@ -23,9 +23,17 @@ public interface LoginService {
 
     @FormUrlEncoded
     @POST("/game/index/messages")
-    Call<String> sendMessage(@Field("text") String text);
+    Call<String> sendMessage(@Field("text") String text, @Field("id") String id, @Field("game") String game);
 
     @FormUrlEncoded
     @POST("/game/index/location")
     Call<ArrayList<Igrac>> pozicije(@Field("lat") String lat,@Field("lng") String lng,@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("/game/index/messagesget")
+    Call<ArrayList<String>> loop (@Field("game") String game, @Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("")
+    Call<String> pocetak(@Field("id") String id);
 }

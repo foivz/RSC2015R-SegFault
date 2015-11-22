@@ -101,6 +101,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
             Thread thread = new Thread(){
                 @Override
                 public void run() {
+                    podaci = new ArrayList<Igrac>();
 
                     while (true) {
 
@@ -118,15 +119,16 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                         call.enqueue(new Callback<ArrayList<Igrac>>() {
                             @Override
                             public void onResponse(Response<ArrayList<Igrac>> response, Retrofit retrofit) {
-                                podaci = new ArrayList<Igrac>(response.body());
+                                podaci = response.body();
 
 
                                 Log.i("TAG", response.message());
                                 if (response.body() != null) {
+                                    mMap.clear();
                                     for (Igrac s : podaci) {
                                         Log.i("TAG", s.getId() + s.getLat() + s.getLng());
                                         LatLng pozicija = new LatLng(Float.valueOf(s.getLat()), Float.valueOf(s.getLng()));
-                                        //mMap.clear();
+
                                         mMap.addMarker(new MarkerOptions().position(pozicija).title("Trenutna pozicija"));
 
                                     }
@@ -136,6 +138,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                                 CameraUpdate zoom = CameraUpdateFactory.zoomTo(20);
                                 mMap.moveCamera(center);
                                 mMap.animateCamera(zoom);
+
                             }
 
                             @Override
@@ -155,6 +158,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
+
                     }
                 }
             };
