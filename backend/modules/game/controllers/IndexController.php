@@ -206,11 +206,11 @@ class IndexController extends Controller
 
                 $skip = false;
                 foreach($ids as $id) {
-                    if(!$id) $skip = true;
+                    if(!$id) break;
                     if($id == $_POST['id']) $skip = true;
                 }
                 if(!$skip)$m->ids = $m->ids.$_POST['id'].';';
-                if(!$skip)$m->save();
+                $m->save();
 
                 if($skip) break;
                 else $data[$i] = $m->text;
