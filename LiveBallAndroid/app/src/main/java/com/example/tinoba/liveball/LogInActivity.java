@@ -47,7 +47,7 @@ public class LogInActivity extends AppCompatActivity{
         SharedSingleton shared = SharedSingleton.getInstance(getApplicationContext());
 
         if (shared.getUserLoggedPrefs() != 0){
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Pocetak_igre.class);
             startActivity(intent);
             finish();
         }
@@ -115,7 +115,7 @@ public class LogInActivity extends AppCompatActivity{
             prefs.putUserLoggedPrefs(Integer.parseInt(id));
         }
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, Pocetak_igre.class);
         startActivity(intent);
         finish();
     }
