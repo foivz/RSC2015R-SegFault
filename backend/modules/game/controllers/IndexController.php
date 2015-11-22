@@ -163,7 +163,7 @@ class IndexController extends Controller
     public function actionLocation() {
         header('Content-type:application/json;charset=utf-8');
         if(isset($_POST['lat']) && isset($_POST['lng']) && isset($_POST['id'])) {
-            $user = GameUser::find()->where(['user_id'=>$_POST['id']])->all();
+            $user = GameUser::find()->where(['user_id'=>6])->all();
             $user->lat = $_POST['lat'];
             $user->lng = $_POST['lng'];
             $user->save();
