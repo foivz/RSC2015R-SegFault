@@ -34,6 +34,6 @@ public interface LoginService {
     Call<ArrayList<String>> loop (@Field("game") String game, @Field("id") String id);
 
     @FormUrlEncoded
-    @POST("")
+    @POST("/game/index/start")
     Call<String> pocetak(@Field("id") String id);
 }

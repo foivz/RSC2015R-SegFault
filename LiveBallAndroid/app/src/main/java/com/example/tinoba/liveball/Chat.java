@@ -1,6 +1,10 @@
 package com.example.tinoba.liveball;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,12 +18,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tinoba.liveball.models.UserLoginRequest;
 import com.example.tinoba.liveball.retrofit.LoginService;
 import com.example.tinoba.liveball.retrofit.ServiceGenerator;
-import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -30,10 +30,11 @@ import retrofit.Retrofit;
 
 public class Chat extends AppCompatActivity {
     String text;
-    String[] poruke ={"Napadni", "Cover fire","Lijevo od tebe", "Pomoć","Ispred tebe", "Iza tebe"};
+    String[] poruke ={"Napadni", "Cover fire","Lijevo od tebe", "Pomoć","Mrtav", "Iza tebe"};
     ArrayList<String> text1;
     ArrayList<String> text2;
     ListView lista;
+    final MediaPlayer mp = new MediaPlayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,13 +54,15 @@ public class Chat extends AppCompatActivity {
         lista.setAdapter(customAdapter);
         Button gumb1 = (Button)findViewById(R.id.gumb1);
 
+
+
         Thread thread = new Thread(){
             @Override
             public void run() {
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
                 while (true){
-                    Call<ArrayList<String>> call = loginService.loop("1","6");
+                    Call<ArrayList<String>> call = loginService.loop("1",/*MainActivity.id_*/"6");
                     call.enqueue(new Callback<ArrayList<String>>(){
                         @Override
                         public void onResponse(Response<ArrayList<String>> response, Retrofit retrofit) {
@@ -71,6 +74,8 @@ public class Chat extends AppCompatActivity {
                                     TextView toastTV = (TextView) toastLayout.getChildAt(0);
                                     toastTV.setTextSize(70);
                                     toast.show();
+                                    Vibrator mVibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                    mVibrator.vibrate(800);
                                 }
                             } else Log.i("TAG", response.message());
 
@@ -79,7 +84,7 @@ public class Chat extends AppCompatActivity {
                         @Override
                         public void onFailure(Throwable t) {
                             Log.e("TAG", t.getMessage());
-                            Toast.makeText(Chat.this, "ne radi", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(Chat.this, "ne radi", Toast.LENGTH_LONG).show();
                         }
                     });
                     try {

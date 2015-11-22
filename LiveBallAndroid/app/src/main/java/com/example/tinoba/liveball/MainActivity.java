@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
     Timer timer;
     TimerTask timerTask;
     Random rand;
+    public static String id_;
+    public static String ime;
+    public static String game;
 
     final Handler handler = new Handler();
     private LocationManager locationManager;
