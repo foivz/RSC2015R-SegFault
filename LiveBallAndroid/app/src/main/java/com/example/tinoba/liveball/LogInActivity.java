@@ -46,7 +46,7 @@ public class LogInActivity extends AppCompatActivity{
 
         SharedSingleton shared = SharedSingleton.getInstance(getApplicationContext());
 
-        if (shared.getUserLoggedPrefs()){
+        if (shared.getUserLoggedPrefs() != 0){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -104,13 +104,20 @@ public class LogInActivity extends AppCompatActivity{
     }
 
     private void loginSuccess(String id) {
-        userModel.setId(Integer.parseInt(id));
         DBHelper dbHelper = new DBHelper(getApplicationContext());
-        dbHelper.writeUser(userModel);
+        SharedSingleton prefs = SharedSingleton.getInstance(getApplicationContext());
+
+        if(dbHelper.checkIfExists(Integer.parseInt(id))){
+            prefs.putUserLoggedPrefs(Integer.parseInt(id));
+        } else {
+            userModel.setId(Integer.parseInt(id));
+            dbHelper.writeUser(userModel);
+            prefs.putUserLoggedPrefs(Integer.parseInt(id));
+        }
+
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
-
     }
 
 

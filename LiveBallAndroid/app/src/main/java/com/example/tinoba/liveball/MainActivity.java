@@ -173,8 +173,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         if (mNfcAdapter.getDefaultAdapter(this) != null)
             mNfcAdapter.getDefaultAdapter(this).disableForegroundDispatch(this);
-
-
     }
 
     @Override

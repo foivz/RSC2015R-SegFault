@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.tinoba.liveball.models.UserModel;
 
@@ -32,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void writeUser(UserModel user){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(Database.usersTable.COLUMN_ID, user.getId());
         values.put(Database.usersTable.COLUMN_NAME, user.getUsername());
         values.put(Database.usersTable.COLUMN_EMAIL, user.getEmail());
         values.put(Database.usersTable.COLUMN_ADMIN, user.getIsAdmin());
@@ -46,12 +48,13 @@ public class DBHelper extends SQLiteOpenHelper {
         String where = Database.usersTable.COLUMN_ID + " = ?";
         Cursor cursor = db.query(
                 Database.usersTable.TABLE_NAME,
-                new String[] {Database.usersTable.COLUMN_ID, Database.usersTable.COLUMN_NAME, Database.usersTable.COLUMN_EMAIL, Database.usersTable.COLUMN_ADMIN, Database.usersTable.COLUMN_AUTH_KEY},
+                new String[]{Database.usersTable.COLUMN_ID, Database.usersTable.COLUMN_NAME, Database.usersTable.COLUMN_EMAIL, Database.usersTable.COLUMN_ADMIN, Database.usersTable.COLUMN_AUTH_KEY},
                 where,
-                new String[] {Integer.toString(id)},
+                new String[]{Integer.toString(id)},
                 null, null, null
         );
 
+        Log.i("db user count", Integer.toString(cursor.getCount()));
         cursor.moveToFirst();
         return new UserModel(
                 cursor.getInt(0),
@@ -60,5 +63,22 @@ public class DBHelper extends SQLiteOpenHelper {
                 cursor.getInt(3),
                 cursor.getString(4)
         );
+    }
+
+    public boolean checkIfExists(int id) {
+        String where = Database.usersTable.COLUMN_ID + " = ? ";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                Database.usersTable.TABLE_NAME,
+                new String[] {Database.usersTable.COLUMN_ID},
+                where,
+                new String[] {Integer.toString(id)},
+                null, null, null
+        );
+
+        if (cursor.getCount() == 0) return false;
+        else return true;
+
     }
 }
