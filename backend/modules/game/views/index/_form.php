@@ -33,6 +33,8 @@ use \yii\jui\DatePicker;
 
     <?= $form->field($model, 'scoreB')->textInput() ?>
 
+    <?php //var_dump($user_ids) or die; ?>
+
     <label>Team A</label>
     <?php $i=0; while($i<$model->players_num): ?>
             <?php
@@ -46,7 +48,7 @@ use \yii\jui\DatePicker;
     <?php $i++; endwhile; ?>
 
     <label>Team B</label>
-    <?php $i=0; while($i<$model->players_num): ?>
+    <?php while($i<$model->players_num*2): ?>
         <?php
         $dropdownCategories = ArrayHelper::map($users, 'id', 'username');
         echo Html::dropDownList('Buser'.$i, (isset($user_ids['B'][$i]) ? $user_ids['B'][$i]:'0'), $dropdownCategories, [

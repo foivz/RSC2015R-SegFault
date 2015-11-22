@@ -112,24 +112,24 @@ class IndexController extends Controller
                 $user_id = $_POST['Auser' . $i];
 
 
-                if (!$user_id) break;
-
-                $assigned->team = "A";
-                $assigned->user_id = $user_id;
-                if (!$assigned->save()) var_dump($assigned->getErrors()) or die;
+                if ($user_id) {
+                    $assigned->team = "A";
+                    $assigned->user_id = $user_id;
+                    if (!$assigned->save()) var_dump($assigned->getErrors()) or die;
+                }
             }
 
-            if(isset($_POST['Buser'.$i])) {
+        if(isset($_POST['Buser'.$i])) {
                 $assigned = GameUser::find()->where(['team' => 'B', 'user_id' => $_POST['Buser'.$i], 'game_id' => $model->id])->one();
                 if(!$assigned) $assigned = new GameUser();
                 $assigned->game_id = $model->id;
                 $user_id = $_POST['Buser' . $i];
 
-                if (!$user_id) break;
-
-                $assigned->team = "B";
-                $assigned->user_id = $user_id;
-                if (!$assigned->save()) var_dump($assigned->getErrors()) or die;
+                if ($user_id) {
+                    $assigned->team = "B";
+                    $assigned->user_id = $user_id;
+                    if (!$assigned->save()) var_dump($assigned->getErrors()) or die;
+                }
             }
         $i++; endwhile;
 
@@ -187,6 +187,22 @@ class IndexController extends Controller
             }
 
             return 'NOT_LIVE';
+        }
+
+        return 'nista';
+    }
+
+    public function actionScore()
+    {
+        header('Content-type:application/json;charset=utf-8');
+        if(isset($_POST['id']) && isset($_POST['game'])) {
+            $user = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one();
+            $game = Game::findOne($user->game_id);
+
+            if($user->team == 'A') $game->scoreA++;
+            else $game->scoreB++;
+
+            if($game->save()) return 'ok';;
         }
 
         return 'nista';
