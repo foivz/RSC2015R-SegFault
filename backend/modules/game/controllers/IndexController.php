@@ -156,11 +156,12 @@ class IndexController extends Controller
 
         header('Content-type:application/json;charset=utf-8');
         if(isset($_POST['text'])) {
-            echo 'proslo';
+            //echo 'proslo';
             $message->user_id = $_POST['id'];
             $message->game_id = $_POST['game_id'];
             $message->text = $_POST['text'];
-            $message->save();
+
+            return $message->save();
         }
     }
 
