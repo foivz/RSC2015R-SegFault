@@ -162,8 +162,23 @@ class IndexController extends Controller
 
     public function actionLocation() {
         header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['latlng']))
-            return json_encode($_POST['latlng']);
+        if(isset($_POST['lat']) && isset($_POST['lng']) && isset($_POST['id'])) {
+            $user = GameUser::find()->where(['user_id'=>$_POST['id']])->all();
+            $user->lat = $_POST['lat'];
+            $user->lng = $_POST['lng'];
+            $user->save();
+            $players = GameUser::find()->where(['team'=>$user->team])->all();
+
+            $data = [];
+
+            foreach($players as $p) {
+                $data[]['id'] = $p->id;
+                $data[]['lat'] = $p->lat;
+                $data[]['lng'] = $p->lng;
+            }
+
+            return json_encode($data);
+        }
 
         return 'nista';
     }
