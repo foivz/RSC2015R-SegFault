@@ -159,7 +159,7 @@ class IndexController extends Controller
         if(isset($_POST['text']) && isset($_POST['game']) && isset($_POST['id'])) {
             $message->user_id = $_POST['id'];
             $message->game_id = $_POST['game'];
-            $message->team = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one();
+            $message->team = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one()->team;
             $message->text = $_POST['text'];
 
             if($message->save()) return 'ok';
@@ -182,9 +182,9 @@ class IndexController extends Controller
 
                 $skip = false;
                 foreach($ids as $id) {
-                    if($id == 12) $skip = true;
+                    if($id == $_POST['id']) $skip = true;
                 }
-                if(!$skip)$m->ids = $m->ids.'12;';
+                if(!$skip)$m->ids = $m->ids.$_POST['id'].';';
                 $m->save();
 
                 if($skip) break;
