@@ -210,7 +210,7 @@ class IndexController extends Controller
                     if($id == $_POST['id']) $skip = true;
                 }
                 if(!$skip)$m->ids = $m->ids.$_POST['id'].';';
-                $m->save();
+                if(!$skip)$m->save();
 
                 if($skip) break;
                 else $data[$i] = $m->text;
