@@ -39,7 +39,7 @@ $this->title = 'My Yii Application';
                         ?>
                                 var latlng_marker = new google.maps.LatLng(<?= $player->lat ?>, <?= $player->lng ?>);
 
-                                console.log(<?= $player->team ?>);
+                                console.log(<?= "'".$player->team."'" ?>);
 
                                 var marker = new google.maps.Marker({
                                     position: latlng_marker,
