@@ -23,7 +23,7 @@ $this->title = 'My Yii Application';
             <div class="history col-md-4"><i class="fa fa-gamepad"></i> GAMES PLAYED: <?= $games_played; ?></div>
 
             <div id="games" class="history">
-                <?php $nogames=true; foreach($games as $model): ?>
+                <?php $nogames=true; foreach($games as $model): break; ?>
                     <?php
                     if(!GameUser::find()->where(['user_id'=>$id])->all()) break;
                     $nogames = false;
@@ -63,7 +63,7 @@ $this->title = 'My Yii Application';
                         <p class="time"></p>
                     </article>
                 <?php endforeach; ?>
-                <?php if($nogames) echo '<div class="col-md-4"><br />No games</div>'; ?>
+                <?php //if($nogames) echo '<div class="col-md-4"><br />No games</div>'; ?>
             </div>
 
         </section>
