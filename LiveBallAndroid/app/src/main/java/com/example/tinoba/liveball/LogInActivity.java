@@ -69,6 +69,7 @@ public class LogInActivity extends AppCompatActivity{
                         ServiceGenerator.createService(LoginService.class);
 
                 UserLoginRequest user = new UserLoginRequest(userNameEditText.getText().toString(), userPassEditText.getText().toString());
+                MainActivity.ime=userNameEditText.getText().toString();
                 userModel = new UserModel(0, user.getUser(), user.getPass(), 0, null);
 
                 Call<String> call = loginService.basicLogin(user.getUser(), user.getPass());
@@ -104,6 +105,7 @@ public class LogInActivity extends AppCompatActivity{
     }
 
     private void loginSuccess(String id) {
+        MainActivity.id_ = id;
         DBHelper dbHelper = new DBHelper(getApplicationContext());
         SharedSingleton prefs = SharedSingleton.getInstance(getApplicationContext());
 

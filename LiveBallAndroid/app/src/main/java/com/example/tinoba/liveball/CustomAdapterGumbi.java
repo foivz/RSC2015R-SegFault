@@ -1,6 +1,7 @@
 package com.example.tinoba.liveball;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,27 +44,29 @@ public class CustomAdapterGumbi extends ArrayAdapter<String>{
         Button button2 = (Button)customView.findViewById(R.id.gumb2);
         button1.setText(text1.get(position).toString());
         button2.setText(text2.get(position).toString());
+        if(button2.getText().equals("Mrtav")){
+            button2.setBackgroundColor(Color.argb(255,194,89,48));
+        }
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
 
-                Call<String> call = loginService.sendMessage(text1.get(position).toString(),"6", "1");
+                Call<String> call = loginService.sendMessage(MainActivity.ime+": "+text1.get(position).toString(),"6"/*MainActivity.id_*/,"1" );
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Response<String> response, Retrofit retrofit) {
-                        Log.i("TAG", "BLA");
                         if (response.body() != null) {
                             Log.i("TAG", response.body().toString());
                         } else Log.i("TAG", "no body");
-                        Toast.makeText(context,"radi",Toast.LENGTH_LONG).show();
+
                     }
 
                     @Override
                     public void onFailure(Throwable t) {
                         Log.e("TAG", t.getMessage());
-                        Toast.makeText(context, "ne radi", Toast.LENGTH_LONG).show();
+
                     }
                 });
 
@@ -77,7 +80,7 @@ public class CustomAdapterGumbi extends ArrayAdapter<String>{
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
 
-                Call<String> call = loginService.sendMessage(text2.get(position).toString(),"6","1");
+                Call<String> call = loginService.sendMessage(MainActivity.ime+": "+text2.get(position).toString(),"6","1");
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Response<String> response, Retrofit retrofit) {

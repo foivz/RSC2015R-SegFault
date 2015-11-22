@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tinoba.liveball.CustomAdapterGumbi;
+import com.example.tinoba.liveball.MainActivity;
 import com.example.tinoba.liveball.R;
 import com.example.tinoba.liveball.retrofit.LoginService;
 import com.example.tinoba.liveball.retrofit.ServiceGenerator;
@@ -63,7 +64,7 @@ public class OtherFragment extends Fragment {
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
                 while (true) {
-                    Call<ArrayList<String>> call = loginService.loop("1", "6");
+                    Call<ArrayList<String>> call = loginService.loop("1", /*MainActivity.id_*/"6");
                     call.enqueue(new Callback<ArrayList<String>>() {
                         @Override
                         public void onResponse(Response<ArrayList<String>> response, Retrofit retrofit) {
