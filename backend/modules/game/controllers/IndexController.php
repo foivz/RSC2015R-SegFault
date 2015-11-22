@@ -170,9 +170,9 @@ class IndexController extends Controller
 
     public function actionMessagesget()
     {
-        /*header('Content-type:application/json;charset=utf-8');
+        header('Content-type:application/json;charset=utf-8');
         //if(isset($_POST['game']) && isset($_POST['id'])) {
-        $user = GameUser::find()->where(['game_id'=>1, 'user_id'=>6])->one();
+        /*$user = GameUser::find()->where(['game_id'=>1, 'user_id'=>6])->one();
         $messages = Message::find()->where(['team'=>$user->team])->all();
         $data = [];
 
@@ -184,6 +184,7 @@ class IndexController extends Controller
         foreach($ids as $id) {
             if(!$id) break;
             if($id == 6) $skip = true;
+            echo $skip;
         }
         if(!$skip)$m->ids = $m->ids.'6;';
         $m->save();
@@ -206,13 +207,12 @@ class IndexController extends Controller
 
                 $skip = false;
                 foreach($ids as $id) {
-                    if(!$id) break;
                     if($id == $_POST['id']) $skip = true;
                 }
                 if(!$skip)$m->ids = $m->ids.$_POST['id'].';';
                 $m->save();
 
-                if($skip) break;
+                if($skip) continue;
                 else {
                     $data[$i] = $m->text;
                     $i++;
