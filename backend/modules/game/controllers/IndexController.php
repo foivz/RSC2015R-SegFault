@@ -159,9 +159,39 @@ class IndexController extends Controller
         if(isset($_POST['text']) && isset($_POST['game']) && isset($_POST['id'])) {
             $message->user_id = $_POST['id'];
             $message->game_id = $_POST['game'];
+            $message->team = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one();
             $message->text = $_POST['text'];
 
             if($message->save()) return 'ok';
+        }
+
+        return 'nista';
+    }
+
+    public function actionMessagesget()
+    {
+        header('Content-type:application/json;charset=utf-8');
+        if(isset($_POST['game']) && isset($_POST['id'])) {
+            $user = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one();
+            $messages = Message::find()->where(['team'=>$user->team])->all();
+            $data = [];
+
+            $i= 0; foreach($messages as $m) {
+                $ids = $m->ids;
+                $ids = explode(';', $ids);
+
+                $skip = false;
+                foreach($ids as $id) {
+                    if($id == 12) $skip = true;
+                }
+                if(!$skip)$m->ids = $m->ids.'12;';
+                $m->save();
+
+                if($skip) break;
+                else $data[$i] = $m->text;
+            $i++; }
+
+            return json_encode($data);
         }
 
         return 'nista';

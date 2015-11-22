@@ -31,7 +31,7 @@ class Message extends \yii\db\ActiveRecord
         return [
             [[], 'required'],
             [['game_id', 'user_id', 'date_added'], 'integer'],
-            [['text'], 'string'],
+            [['text', 'ids', 'team'], 'string'],
         ];
     }
 
