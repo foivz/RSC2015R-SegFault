@@ -206,6 +206,7 @@ class IndexController extends Controller
 
                 $skip = false;
                 foreach($ids as $id) {
+                    if(!$id) break;
                     if($id == $_POST['id']) $skip = true;
                 }
                 if(!$skip)$m->ids = $m->ids.$_POST['id'].';';
