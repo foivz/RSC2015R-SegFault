@@ -33,21 +33,11 @@ $this->title = 'My Yii Application';
 
                                 map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-                        var goldStar = {
-                            //path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
-                            fillColor: 'yellow',
-                            fillOpacity: 0.8,
-                            scale: 1,
-                            strokeColor: 'gold',
-                            strokeWeight: 14
-                        };
-
-
                         <?php
                             $players = \backend\modules\game\models\GameUser::find()->where(['game_id'=>$model->id])->all();
                             foreach($players as $player):
                         ?>
-                                var latlng_marker = new google.maps.LatLng(-34.397, 140.644);
+                                var latlng_marker = new google.maps.LatLng(<?= $player->lat ?>, <?= $player->lng ?>);
 
                                 var marker = new google.maps.Marker({
                                     position: latlng_marker,
