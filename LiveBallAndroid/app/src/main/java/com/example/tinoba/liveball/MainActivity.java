@@ -24,6 +24,7 @@ import com.example.tinoba.liveball.fragments.OtherFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter selectionsPagerAdapter;
     private ViewPager viewPager;
-
     Timer timer;
     TimerTask timerTask;
+    Random rand;
 
     final Handler handler = new Handler();
     private LocationManager locationManager;
@@ -49,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         selectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        rand = new Random();
 
         // Set up the ViewPager with the sections adapter.
         viewPager = (ViewPager) findViewById(R.id.container);
@@ -86,6 +89,15 @@ public class MainActivity extends AppCompatActivity {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
+        }
+
+        public Fragment getActiveFragment(ViewPager container, int position) {
+            String name = makeFragmentName(container.getId(), position);
+            return  getSupportFragmentManager().findFragmentByTag(name);
+        }
+
+        private String makeFragmentName(int viewId, int index) {
+            return "android:switcher:" + viewId + ":" + index;
         }
 
         @Override
@@ -178,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         Log.d("KEFKEF","Intent uhvaćen");
-        MainFragment fragment = (MainFragment) selectionsPagerAdapter.getItem(0);
-        fragment.setNfcTextView("ZASTAVA");
+        MainFragment fragment = (MainFragment) selectionsPagerAdapter.getActiveFragment(viewPager, 0);
+        fragment.setNfcTextView(rand.nextInt(4));
     }
 }
