@@ -202,7 +202,7 @@ class IndexController extends Controller
             if($user->team == 'A') $game->scoreA++;
             else $game->scoreB++;
 
-            //if($game->save()) return 'ok';
+            if($game->save()) return 'ok';
 
             $user = UserProfile::findOne($_POST['id']);
             $user->kills++;
