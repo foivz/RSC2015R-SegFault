@@ -34,7 +34,7 @@ class Game extends \yii\db\ActiveRecord
             [[], 'required'],
             [['name'], 'string', 'max' => 255],
             [['date_added', 'scoreA', 'scoreB', 'players_num'], 'integer'],
-            [['start', 'end', 'date'], 'safe'],
+            [['start', 'end', 'date', 'live'], 'safe'],
         ];
     }
 

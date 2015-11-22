@@ -172,10 +172,10 @@ class IndexController extends Controller
     {
         header('Content-type:application/json;charset=utf-8');
         if(isset($_POST['id'])) {
-            $users = GameUser::find()->where(['user_id'=>$_POST['id']])->one();
+            $users = GameUser::find()->where(['user_id'=>$_POST['id']])->all();
 
             foreach($users as $u) {
-                $game = Game::find()->where(['id'=>$u->game_id])->one();
+                $game = Game::findOne($u->game_id);
                 if($game->live) return 'LIVE';
             }
 
