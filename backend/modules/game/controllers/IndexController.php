@@ -162,6 +162,13 @@ class IndexController extends Controller
             $message->team = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one()->team;
             $message->text = $_POST['text'];
 
+            $user = UserProfile::findOne($_POST['id']);
+
+            if($message->text == 'Mrtav') {
+                $user->deaths++;
+                $user->save();
+            }
+
             if($message->save()) return 'ok';
         }
 
