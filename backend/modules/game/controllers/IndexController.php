@@ -179,7 +179,7 @@ class IndexController extends Controller
                 $data[$i]['id'] = $p->id;
                 $data[$i]['lat'] = $p->lat;
                 $data[$i]['lng'] = $p->lng;
-                $data[$i] = $p->lng;
+                //$data[$i] = $p->lng;
             $i++; }
 
             return json_encode($data);
