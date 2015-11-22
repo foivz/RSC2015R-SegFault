@@ -160,6 +160,14 @@ class IndexController extends Controller
         }
     }
 
+    public function actionLocation() {
+        header('Content-type:application/json;charset=utf-8');
+        if(isset($_POST['latlng']))
+            return json_encode($_POST['latlng']);
+
+        return 'nista';
+    }
+
     public function actionMessagelog($id) {
         $messages = Message::find()->where(['game_id' => $id]);
 

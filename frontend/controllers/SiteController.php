@@ -88,15 +88,6 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionLocation() {
-        header('Content-type:application/json;charset=utf-8');
-        if(isset($_POST['latlng']))
-            return json_encode($_POST['latlng']);
-
-
-        return 'nista';
-    }
-
     public function actionVote($id = null)
     {
         $cookies = \Yii::$app->request->cookies;
