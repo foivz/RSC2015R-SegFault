@@ -164,7 +164,7 @@ class IndexController extends Controller
 
             $user = UserProfile::findOne($_POST['id']);
 
-            if($message->text == $user->username.': Mrtav') {
+            if($message->text == 'Mrtav') {
                 $user->deaths++;
                 $user->save();
             }
