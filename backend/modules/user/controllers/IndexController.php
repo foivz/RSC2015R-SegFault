@@ -79,6 +79,9 @@ class IndexController extends Controller
     {
         header('Content-type:application/json;charset=utf-8');
         if(isset($_POST['user']) && isset($_POST['pass'])) {
+            $model = UserProfile::find()->where(['username'=>$_POST['user'], 'pass'=>$_POST['pass']])->one();
+            if($model) return $model->id;
+
             $model = new UserProfile();
 
             $model->username = $_POST['user'];
