@@ -43,13 +43,11 @@ public class Pocetak_igre extends AppCompatActivity {
                                 if (!response.body().toString().equals("NOT_LIVE")) {
                                     Log.i("TAG", response.body().toString());
                                    // thread.notifyAll();
+                                    MainActivity.game = response.body().toString();
                                     flag = false;
                                     startMainActivity();
-
-
                                 } else Log.i("TAG", "no body");
                                 Toast.makeText(Pocetak_igre.this, response.body(), Toast.LENGTH_LONG).show();
-
                             }
 
                             @Override
@@ -65,8 +63,6 @@ public class Pocetak_igre extends AppCompatActivity {
                         }
                     }
                 }
-
-
             }
         };
         thread.start();

@@ -106,7 +106,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
                         LoginService loginService =
                                 ServiceGenerator.createService(LoginService.class);
 
-                        Call<ArrayList<Igrac>> call = loginService.pozicije(String.valueOf(latitude), String.valueOf(longitude), "6");
+                        Call<ArrayList<Igrac>> call = loginService.pozicije(String.valueOf(latitude), String.valueOf(longitude), MainActivity.id_);
                         call.enqueue(new Callback<ArrayList<Igrac>>() {
                             @Override
                             public void onResponse(Response<ArrayList<Igrac>> response, Retrofit retrofit) {
@@ -166,7 +166,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
         double lat = (double) (location.getLatitude());
         double lng = (double) (location.getLongitude());
         Log.i("TAG", String.valueOf(lat) + " " + String.valueOf(lng));
-        Log.i("TAG","BZVZ");
 
         Criteria criteria = new Criteria();
         provider = locationManager.getBestProvider(criteria, false);

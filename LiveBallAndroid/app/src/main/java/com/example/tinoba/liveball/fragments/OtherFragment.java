@@ -1,6 +1,8 @@
 package com.example.tinoba.liveball.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +34,7 @@ import retrofit.Retrofit;
  */
 public class OtherFragment extends Fragment {
     String text;
-    String[] poruke = {"Napadni", "Cover fire", "Lijevo od tebe", "Pomoć", "Ispred tebe", "Iza tebe"};
+    String[] poruke = {"Napadni", "Cover fire", "Lijevo od tebe", "Pomoć", "Mrtav", "Iza tebe"};
     ArrayList<String> text1;
     ArrayList<String> text2;
     ListView lista;
@@ -64,7 +66,7 @@ public class OtherFragment extends Fragment {
                 LoginService loginService =
                         ServiceGenerator.createService(LoginService.class);
                 while (true) {
-                    Call<ArrayList<String>> call = loginService.loop("1", /*MainActivity.id_*/"6");
+                    Call<ArrayList<String>> call = loginService.loop(MainActivity.game, MainActivity.id_);
                     call.enqueue(new Callback<ArrayList<String>>() {
                         @Override
                         public void onResponse(Response<ArrayList<String>> response, Retrofit retrofit) {
@@ -76,6 +78,8 @@ public class OtherFragment extends Fragment {
                                     TextView toastTV = (TextView) toastLayout.getChildAt(0);
                                     toastTV.setTextSize(70);
                                     toast.show();
+                                    Vibrator mVibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+                                    mVibrator.vibrate(800);
                                 }
                             } else Log.i("TAG", response.message());
 

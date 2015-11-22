@@ -61,15 +61,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(selectionsPagerAdapter);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Pridružio si se igri", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         if (mNfcAdapter == null) {
@@ -101,13 +92,12 @@ public class MainActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == 0) return new MainFragment();
-            else if(position == 1) return new MapFragment(getApplicationContext());
             else return new OtherFragment();
         }
 
         @Override
         public int getCount() {
-            return 3;
+            return 2;
         }
 
         @Override

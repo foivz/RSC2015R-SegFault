@@ -46,11 +46,11 @@ public class LogInActivity extends AppCompatActivity{
 
         SharedSingleton shared = SharedSingleton.getInstance(getApplicationContext());
 
-        if (shared.getUserLoggedPrefs() != 0){
-            Intent intent = new Intent(this, Pocetak_igre.class);
-            startActivity(intent);
-            finish();
-        }
+//        if (shared.getUserLoggedPrefs() != 0){
+//            Intent intent = new Intent(this, Pocetak_igre.class);
+//            startActivity(intent);
+//            finish();
+//        }
 
         userNameEditText = (EditText) findViewById(R.id.user_name_edit_text);
         userPassEditText = (EditText) findViewById(R.id.password_edit_text);

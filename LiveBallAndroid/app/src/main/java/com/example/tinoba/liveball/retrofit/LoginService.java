@@ -39,6 +39,7 @@ public interface LoginService {
 
     @FormUrlEncoded
     @POST("/game/index/score")
-    Call<ArrayList<String>> flagCaptured(@Field("game") String game, @Field("id") String id);
+    Call<String> flagCaptured(@Field("game") String game, @Field("id") String id);
+
 
 }

@@ -30,7 +30,10 @@
 
         <activity android:name=".LogInActivity" >
 
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <meta-data
@@ -51,10 +54,7 @@
         </activity>
 
         <activity android:name=".Chat" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity android:name=".Pocetak_igre" >
