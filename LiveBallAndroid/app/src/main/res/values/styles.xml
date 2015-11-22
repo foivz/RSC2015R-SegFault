@@ -24,4 +24,6 @@
         <item name="android:fontFamily">sans-serif-condensed</item>
     </style>
 
+    <color name="grey_dark">#DDDDDD</color>
+    <color name="accent_dark">#f54e4e</color>
 </resources>
