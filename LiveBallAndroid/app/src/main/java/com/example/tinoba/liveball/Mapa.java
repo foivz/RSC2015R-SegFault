@@ -10,6 +10,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -22,7 +23,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tinoba.liveball.retrofit.LoginService;
+import com.example.tinoba.liveball.retrofit.ServiceGenerator;
 import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,8 +35,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit.Call;
+import retrofit.Callback;
+import retrofit.Response;
+import retrofit.Retrofit;
 
 public class Mapa extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,8 +50,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     LocationManager locationManager;
     String provider;
     Location location;
+    private ArrayList<Igrac> podaci;
+    double longitude = 0;
+    double latitude = 0;
 
-    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +78,112 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
+
+        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        final Location location;
+        final GoogleMap mMap;
         mMap = googleMap;
-        mMap.setMyLocationEnabled(true);
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        LocationManager locationManager = (LocationManager)
-                getSystemService(Context.LOCATION_SERVICE);
+
+
+
+        if (network_enabled) {
+            if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+
+
+
+            }
+
+            location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            Thread thread = new Thread(){
+                @Override
+                public void run() {
+
+                    while (true) {
+
+
+                        if (location != null) {
+                            longitude = location.getLongitude();
+                            latitude = location.getLatitude();
+                            Log.i("TAG", String.valueOf(latitude) + " " + String.valueOf(longitude));
+                        }
+
+                        LoginService loginService =
+                                ServiceGenerator.createService(LoginService.class);
+
+                        Call<ArrayList<Igrac>> call = loginService.pozicije(String.valueOf(latitude), String.valueOf(longitude), "6");
+                        call.enqueue(new Callback<ArrayList<Igrac>>() {
+                            @Override
+                            public void onResponse(Response<ArrayList<Igrac>> response, Retrofit retrofit) {
+                                podaci = new ArrayList<Igrac>(response.body());
+
+
+                                Log.i("TAG", response.message());
+                                if (response.body() != null) {
+                                    for (Igrac s : podaci) {
+                                        Log.i("TAG", s.getId() + s.getLat() + s.getLng());
+                                        LatLng pozicija = new LatLng(Float.valueOf(s.getLat()), Float.valueOf(s.getLng()));
+                                        //mMap.clear();
+                                        mMap.addMarker(new MarkerOptions().position(pozicija).title("Trenutna pozicija"));
+
+                                    }
+                                    Log.i("TAG", response.body().toString());
+                                } else Log.i("TAG", "no body");
+                                CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude, longitude));
+                                CameraUpdate zoom = CameraUpdateFactory.zoomTo(20);
+                                mMap.moveCamera(center);
+                                mMap.animateCamera(zoom);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+                                Log.e("TAG", t.getMessage());
+                            }
+                        });
+                     //   mMap.setMyLocationEnabled(true);
+
+                        //mMap.moveCamera(CameraUpdateFactory.newLatLng(pozicija));
+                        LocationManager locationManager = (LocationManager)
+                                getSystemService(Context.LOCATION_SERVICE);
+
+
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            };
+            thread.start();
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
 
     }
 
+
+
+
     public void onLocationChanged(Location location) {
+        Log.i("TAG","bok");
         Geocoder geocoder = new Geocoder(Mapa.this, Locale.getDefault());
         try {
             address = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);

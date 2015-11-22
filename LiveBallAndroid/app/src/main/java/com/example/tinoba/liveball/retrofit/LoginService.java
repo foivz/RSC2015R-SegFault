@@ -1,7 +1,10 @@
 package com.example.tinoba.liveball.retrofit;
 
+import com.example.tinoba.liveball.Igrac;
 import com.example.tinoba.liveball.models.UserLoginRequest;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import retrofit.Call;
 import retrofit.Callback;
@@ -21,4 +24,8 @@ public interface LoginService {
     @FormUrlEncoded
     @POST("/game/index/messages")
     Call<String> sendMessage(@Field("text") String text);
+
+    @FormUrlEncoded
+    @POST("/game/index/location")
+    Call<ArrayList<Igrac>> pozicije(@Field("lat") String lat,@Field("lng") String lng,@Field("id") String id);
 }
