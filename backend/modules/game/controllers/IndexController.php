@@ -196,8 +196,8 @@ class IndexController extends Controller
 
         if(isset($_POST['game']) && isset($_POST['id'])) {
             $user = GameUser::find()->where(['game_id'=>$_POST['game'], 'user_id'=>$_POST['id']])->one();
-            $messages = Message::find()->where(['team'=>$user->team])->all();
-            $data = [];
+            /*$messages = Message::find()->where(['team'=>$user->team])->all();
+            /*$data = [];
 
             $i= 0; foreach($messages as $m) {
                 $ids = $m->ids;
@@ -215,7 +215,7 @@ class IndexController extends Controller
             $i++; }
 
             if(empty($data)) return 'prazno';
-            return json_encode($data);
+            return json_encode($data);*/
         }
 
         return 'nista';
