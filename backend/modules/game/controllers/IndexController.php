@@ -171,11 +171,13 @@ class IndexController extends Controller
 
             $data = [];
 
+            $i = 0;
             foreach($players as $p) {
-                $data[]['id'] = $p->id;
-                $data[]['lat'] = $p->lat;
-                $data[]['lng'] = $p->lng;
-            }
+                //$data[$i]['id'] = $p->id;
+                //$data[$i]['lat'] = $p->lat;
+                //$data[$i]['lng'] = $p->lng;
+                $data[$i] = $p->lng;
+            $i++; }
 
             return json_encode($data);
         }
